@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.texa-KICKZONE{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+} .judul {
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(254, 254, 254);
+}
+
+.button-login {
+  width: 150px;
+
+}
