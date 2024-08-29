@@ -1,6 +1,8 @@
 import { Instagram } from "lucide-react";
 import { Twitter } from "lucide-react";
 import { Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
+
 
 export default function Home() {
   return (
@@ -46,7 +48,7 @@ export default function Home() {
           </h1>
           <div className="flex justify-start space-x-4 mt-6">
             <button className="button-login bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-700">
-              Login
+               <Link to="/login">Login</Link>
             </button>
             <button className="button-login bg-green-500 text-white py-2 px-6 rounded hover:bg-green-700">
               Register

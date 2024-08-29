@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.texa-KICKZONE{
-  font-family:Georgia, 'Times New Roman', Times, serif;
-} .judul {
+.texa-KICKZONE {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.judul {
   font-family: 'Times New Roman', Times, serif;
   color: rgb(254, 254, 254);
 }
@@ -12,4 +14,27 @@
 .button-login {
   width: 150px;
 
+}
+
+.container-bg-1 {
+  display: flex;
+  gap: 22px;
+  /* background-color: #ffffff; */
+  background-color: rgb(145, 235, 255);
+
+  /* margin: 10px; */
+  /* margin-top: 90px; */
+
+
+
+}
+
+.container-bg-2 {
+  background-color: #4f4b4b;
+  padding: 30px;
+  width: 360px;
+  box-shadow: 0 20px 9px rgba(0, 0, 0, 0.1);
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+  border-radius: 5px;
 }
