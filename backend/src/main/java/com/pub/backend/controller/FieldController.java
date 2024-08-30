@@ -50,8 +50,9 @@ public class FieldController {
     }
 
     // Update a field
-    @PutMapping
-    public String update(@RequestBody Field field) {
+    @PutMapping("/{id}")
+    public String update(@PathVariable Long id,@RequestBody Field field) {
+        field.setId(id);
         repository.save(field);
         return "Field successfully updated";
     }

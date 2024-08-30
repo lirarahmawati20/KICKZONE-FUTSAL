@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
-import { HandCoins, Handshake, HeartPulse, Laugh } from "lucide-react";
+import { HandCoins, Handshake, HeartPulse, Laugh, TicketPlus } from "lucide-react";
 import FieldList from "./FieldList";
 
 const HomeAdmin = () => {
@@ -23,6 +23,7 @@ const HomeAdmin = () => {
         <HeaderAdmin onMenuClick={handleMenuClick} showMenu={showMenu} />
         <main>
           <h1 className="text-3xl font-bold mb-6 mt-5 ml-">Home Admin</h1>
+          
           <div className="px-6 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {/* Existing Boxes */}
@@ -51,7 +52,7 @@ const HomeAdmin = () => {
               </div>
             </div>
           </div>
-          <FieldList/>
+          {/* <FieldList/> */}
         </main>
       </div>
     </div>

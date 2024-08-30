@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -17,23 +18,19 @@ public class Sewa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-
-    
-    // private Long idUser; 
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
-    private Field field_id ;
+    private Field field_id;
 
-    private LocalDateTime tanggalPesan; 
+    private LocalDateTime tanggalPesan;
 
-    private Integer lamaSewa; 
+    private Integer lamaSewa;
 
-    private Integer jamSewa; 
+    private LocalTime waktuMulai;
+    private LocalTime waktuBerakhir;
 
-    private Integer harga; 
-
-    private Integer total; 
-
+    private Integer harga;
+    private Integer total;
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pub.backend.model.Payment;
+import com.pub.backend.model.Sewa;
 import com.pub.backend.repository.PaymentRepository;
 
 
@@ -51,13 +52,12 @@ public class PaymentController {
         return "payment successfully added";
     }
 
-    
-    @PutMapping
-    public String update(@RequestBody Payment payment) {
+     @PutMapping("/{id}")
+    public String update(@PathVariable Long id,@RequestBody  Payment payment) {
+        payment.setId(id);
         repository.save(payment);
-        return "payment successfully updated";
+        return " Payment successfully updated";
     }
-
     
     @DeleteMapping("/{id}")
     public String deleteById(@PathVariable Long id) {

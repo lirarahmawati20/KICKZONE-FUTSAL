@@ -28,7 +28,6 @@ public class Payment {
     private Sewa Id_sewa ;
     
     private String bukti; 
-
     private LocalDate tanggal_uplode;
     private String konfirmasi; 
 }

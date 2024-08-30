@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pub.backend.model.Field;
 import com.pub.backend.model.Sewa;
 import com.pub.backend.repository.SewaRepository;
 
@@ -47,13 +48,13 @@ public class SewaController {
         return "sewa successfully added";
     }
 
-    
-    @PutMapping
-    public String update(@RequestBody Sewa sewa) {
-        repository.save(sewa);
-        return "sewa successfully updated";
-    }
 
+    @PutMapping("/{id}")
+    public String update(@PathVariable Long id,@RequestBody Sewa sewa) {
+        sewa.setId(id);
+        repository.save(sewa);
+        return "Sewa successfully updated";
+    }
    
     @DeleteMapping("/{id}")
     public String deleteById(@PathVariable Long id) {

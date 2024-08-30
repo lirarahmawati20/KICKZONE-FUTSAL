@@ -20,12 +20,12 @@ export default function HeaderUser() {
               </Link>
             </li>
             <li>
-              <Link to="/anak-anak" className="hover:underline">
+              <Link to="/user/homeUser" className="hover:underline">
                 Lapanagan
               </Link>
             </li>
             <li>
-              <Link to="/pria" className="hover:underline">
+              <Link to="/user/payment" className="hover:underline">
                 Pembayaran
               </Link>
             </li>

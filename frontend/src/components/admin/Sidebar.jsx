@@ -1,5 +1,7 @@
 // src/components/Sidebar.jsx
+import { CircleUserRound, ClipboardList, ClipboardPenLine, Clock, House, LogOut, SmilePlus } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isVisible }) => {
   return (
@@ -11,35 +13,79 @@ const Sidebar = ({ isVisible }) => {
       <nav>
         <ul className="space-y-8">
           <li>
-            <a href="#" className="text-white hover:text-red-500">
-              Home
-            </a>
+            <Link
+              to="/admin/homeAdmin"
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                {" "}
+                <House />
+                Home
+              </div>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white hover:text-white">
-              Data Member
-            </a>
+            <Link
+              to="/admin/fieldList"
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                {" "}
+                <ClipboardPenLine /> Data Lapangan
+              </div>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white hover:text-white">
-              Data Lapangan
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-white hover:text-white">
-              Data Pesanan
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-white hover:text-white">
-              Data Data Admin
-            </a>
+            <Link
+              to="/admin/SewaList"
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                {" "}
+                <ClipboardList />
+                Data Pemesan
+              </div>
+            </Link>
           </li>
 
           <li>
-            <a href="#" className="text-white hover:text-white">
-              History Member
-            </a>
+            <Link
+              to="/admin/dataMember"
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                <CircleUserRound /> Data Member
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/historyMember" className="text-white hover:text-red-500">
+              <div className="flex gap-3">
+                {" "}
+                <Clock />
+                History Member
+              </div>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              to="/admin/dataAdmin" 
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                {" "}
+                <SmilePlus />
+                Data Admin
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" className="text-white hover:text-red-500">
+              <div className="flex gap-3">
+                <LogOut /> LogOut
+              </div>
+            </Link>
           </li>
         </ul>
       </nav>
