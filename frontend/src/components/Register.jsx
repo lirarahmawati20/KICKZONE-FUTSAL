@@ -134,7 +134,7 @@ const Register = () => {
         </div>
       </div>
       <div className="w-1/2 bg-gray-800 flex items-center justify-center">
-        {/* Tambahkan gambar atau konten lain di sini */}
+        <img src="/image/football_player_PNG78.png" alt="" />
       </div>
     </div>
   );

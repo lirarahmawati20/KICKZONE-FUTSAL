@@ -12,11 +12,11 @@ export default function Home() {
   return (
     <div>
       {/* Header Section */}
-      <header className="bg-gray-800 text-white py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50">
+      <header className="bg-gray-800 text-white py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50 ">
         <div id="home" className="text-2xl font-bold">
-          <a href="#" >KICKZONE FUTSAL</a>
+          <a href="#">KICKZONE FUTSAL</a>
         </div>
-        <div className="hidden lg:flex space-x-6">
+        <div className="hidden lg:flex space-x-6 font-serif">
           <a href="#home" className="hover:bg-gray-600 px-4 py-2 rounded">
             Home
           </a>
@@ -44,7 +44,7 @@ export default function Home() {
             menuOpen ? "block" : "hidden"
           } absolute top-16 left-0 w-full bg-gray-800`}
         >
-          <ul className="flex flex-col space-y-2">
+          <ul className="flex flex-col space-y-2 font-serif">
             <li>
               <a href="#home" className="block px-4 py-2 hover:bg-gray-600">
                 Home
@@ -74,11 +74,11 @@ export default function Home() {
         className="h-screen w-full flex items-center justify-start bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('/image/How the football trend is Shifting towards Middle East_.jpg')",
+            "url('/image/ad6de2caac41059a5aa5c90f1f716542fe357c0c.webp')",
         }}
       >
-        <div className="text-left ml-6 md:ml-12 lg:ml-24">
-          <h1 className="text-4xl md:text-6xl font-bold text-lime-700 shadow-lg">
+        <div className="text-left ml-6 md:ml-12 lg:ml-24 italic font-serif">
+          <h1 className="text-4xl md:text-6xl font-bold text-white shadow-lg">
             Sehatkan Dirimu
             <p>Dengan Berolahraga</p>
             <p>di Kickzone Futsal</p>
@@ -86,11 +86,11 @@ export default function Home() {
           <div className="flex justify-start space-x-4 mt-6">
             <Link
               to="/login"
-              className="bg-slate-500 text-white py-2 px-6 rounded hover:bg-blue-700"
+              className="bg-amber-500 text-white py-2 px-10 rounded hover:bg-amber-300"
             >
               Login
             </Link>
-            <button className="bg-green-500 text-white py-2 px-6 rounded hover:bg-green-700">
+            <button className="bg-green-700 text-white py-2 px-10 rounded hover:bg-green-500">
               Register
             </button>
           </div>
@@ -100,14 +100,26 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center">
-          <div className="flex-1 mb-6 md:mb-0">
-            <img
-              src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
-              alt="Lapangan Futsal"
-              className="w-full h-auto md:w-96 md:h-72 object-cover rounded shadow-lg"
-            />
+          <div className="flex-1 mb-6 md:mb-0 relative">
+            <div className="relative">
+              <img
+                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                alt="Lapangan Futsal"
+                className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg"
+              />
+              <img
+                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                alt="Lapangan Futsal"
+                className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg absolute top-2 left-2 md:top-5 md:left-5"
+              />
+              <img
+                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                alt="Lapangan Futsal"
+                className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg absolute top-4 left-4 md:top-10 md:left-10"
+              />
+            </div>
           </div>
-          <div className="flex-1 md:ml-8">
+          <div className="flex-1 md:ml-8 font-serif">
             <h2 className="text-3xl font-bold mb-4">Tentang Kami</h2>
             <p className="text-lg">
               Kickzone Futsal adalah pusat olahraga yang didedikasikan untuk
@@ -120,9 +132,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Location and Contact Sections */}
-      <section className="py-12 px-6 bg-gray-200">
+      <section className="py-12 px-6 bg-gray-200 font-serif">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:space-x-6">
           <div id="location" className="flex-1 mb-6 md:mb-0">
             <h2 className="text-3xl font-bold mb-4">Lokasi Kami</h2>
@@ -191,7 +202,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-gray-800 text-white py-6 px-6">
+      <footer className="bg-gray-800 text-white py-6 px-6 font-serif">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
           {/* Contact Information */}
           <div className="mb-6 md:mb-0">

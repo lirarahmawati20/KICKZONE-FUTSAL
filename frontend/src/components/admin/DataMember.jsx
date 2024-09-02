@@ -3,34 +3,33 @@ import HeaderAdmin from "./HeaderAdmin";
 import { useEffect, useState } from "react";
 
 const DataMember = () => {
-  const [users, setUsers] = useState([]);
+  const [user_tbl, setUsers] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
 
-useEffect(() => {
-  fetch("http://localhost:8080/api/auth/register")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Data received:", data); // Log data untuk debugging
-      setUsers(data);
-    })
-    .catch((error) => {
-      console.error("Terjadi kesalahan saat mengambil data:", error);
-    });
-}, []);
-
+  useEffect(() => {
+    fetch("http://localhost:8080/api/auth/user_tbl")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data received:", data);
+        setUsers(data);
+      })
+      .catch((error) => {
+        console.error("Terjadi kesalahan saat mengambil data:", error);
+      });
+  }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/api/outh/register/${id}`, {
+    fetch(`http://localhost:8080/api/auth/user_tbl/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
-          setUsers(users.filter((user) => user.id !== id));
+          setUsers(user_tbl.filter((user) => user.id !== id));
         } else {
           throw new Error("Failed to delete");
         }
@@ -67,23 +66,25 @@ useEffect(() => {
                   <th className="py-2 px-4 text-left">No</th>
                   <th className="py-2 px-4 text-left">Nama Lengkap</th>
                   <th className="py-2 px-4 text-left">Email</th>
-                  <th className="py-2 px-4 text-left">Role</th>
+                  <th className="py-2 px-4 text-left">Jenis Kelamin</th>
+                  <th className="py-2 px-4 text-left">No Hp</th>
                   <th className="py-2 px-4 text-left">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, index) => (
+                {user_tbl.map((user, index) => (
                   <tr key={user.id} className="border-b border-gray-200">
                     <td className="py-2 px-4">{index + 1}</td>
                     <td className="py-2 px-4">{user.name}</td>
                     <td className="py-2 px-4">{user.email}</td>
-                    <td className="py-2 px-4">{user.role}</td>
+                    <td className="py-2 px-4">{user.jenisKelamin}</td>
+                    <td className="py-2 px-4">{user.noHp}</td>
                     <td className="py-2 px-4">
                       <button
                         onClick={() => handleDelete(user.id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded"
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                       >
-                        Delete
+                        Hapus
                       </button>
                     </td>
                   </tr>

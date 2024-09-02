@@ -31,6 +31,8 @@ public class User implements UserDetails {
     private String password;
 
     private String name;
+    // private String jenisKelamin;
+    // private String noHp;
 
     private String role;
 

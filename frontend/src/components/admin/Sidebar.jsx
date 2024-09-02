@@ -26,6 +26,16 @@ const Sidebar = ({ isVisible }) => {
           </li>
           <li>
             <Link
+              to="/admin/dataMember"
+              className="text-white hover:text-red-500"
+            >
+              <div className="flex gap-3">
+                <CircleUserRound /> Data Member
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/admin/fieldList"
               className="text-white hover:text-red-500"
             >
@@ -43,21 +53,11 @@ const Sidebar = ({ isVisible }) => {
               <div className="flex gap-3">
                 {" "}
                 <ClipboardList />
-                Data Pemesan
+                Data Pesanan
               </div>
             </Link>
           </li>
 
-          <li>
-            <Link
-              to="/admin/dataMember"
-              className="text-white hover:text-red-500"
-            >
-              <div className="flex gap-3">
-                <CircleUserRound /> Data Member
-              </div>
-            </Link>
-          </li>
           {/* <li>
             <Link to="/historyMember" className="text-white hover:text-red-500">
               <div className="flex gap-3">
@@ -70,7 +70,7 @@ const Sidebar = ({ isVisible }) => {
 
           <li>
             <Link
-              to="/admin/dataAdmin" 
+              to="/admin/dataAdmin"
               className="text-white hover:text-red-500"
             >
               <div className="flex gap-3">

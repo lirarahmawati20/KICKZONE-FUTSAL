@@ -5,6 +5,7 @@ import HeaderUser from "./HeaderUser";
 const Pembayaran = () => {
   const [sewa, setSewa] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState({});
 
@@ -48,18 +49,18 @@ const Pembayaran = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPayment(null);
+    setIsPaymentCompleted(false); // Reset status pembayaran selesai
   };
 
   const handleSavePayment = () => {
-    // Simulasi proses penyimpanan
-    alert("Pembayaran berhasil disimpan!");
 
     setPaymentStatus((prevStatus) => ({
       ...prevStatus,
       [selectedPayment.id]: "Selesai",
     }));
 
-    closeModal();
+    setIsPaymentCompleted(true); // Set status pembayaran selesai
+   
   };
 
   return (
@@ -78,7 +79,7 @@ const Pembayaran = () => {
                 <th className="py-3 px-4 text-left">Jam Mulai</th>
                 <th className="py-3 px-4 text-left">Jam Berakhir</th>
                 <th className="py-3 px-4 text-left">Total</th>
-                <th className="py-3 px-4 text-left">Actions</th>
+                <th className="py-3 px-4 text-left">Kompirmasi</th>
               </tr>
             </thead>
             <tbody>
@@ -127,7 +128,7 @@ const Pembayaran = () => {
         </div>
       </main>
 
-      {isModalOpen && selectedPayment && (
+      {isModalOpen && !isPaymentCompleted && selectedPayment && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <h2 className="text-xl font-bold mb-4">Detail Pembayaran</h2>
@@ -138,6 +139,7 @@ const Pembayaran = () => {
             </p>
             <p>Harga: Rp {selectedPayment.harga}</p>
             <p>Total: Rp {selectedPayment.total}</p>
+            
 
             <div className="mt-4 flex gap-4">
               <div className="flex-1">
@@ -148,6 +150,7 @@ const Pembayaran = () => {
                 />
               </div>
             </div>
+            <p className="border-spacing-4 border-4 justify-center mt-3 p-2 text-center">Setatus belum bayar </p>
 
             <div className="mt-6 flex justify-between">
               <button
@@ -161,6 +164,23 @@ const Pembayaran = () => {
                 onClick={handleSavePayment}
               >
                 Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isPaymentCompleted && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-xl font-bold mb-4">Pembayaran Selesai</h2>
+            <p>Terima kasih, pembayaran Anda telah berhasil diproses!</p>
+            <div className="mt-6 flex justify-center">
+              <button
+                className="bg-green-500 px-4 py-2 text-white rounded hover:bg-green-600"
+                onClick={closeModal}
+              >
+                OK
               </button>
             </div>
           </div>

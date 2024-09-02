@@ -23,7 +23,10 @@ const Login = () => {
       .then((response) => {
         if (response.ok) {
           // return response.json();
-          fetch(`http://localhost:8080/api/auth/me`)
+          fetch("http://localhost:8080/api/auth/me",{
+            method:"GET",
+            credentials:"include"})
+          
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
@@ -127,8 +130,7 @@ const Login = () => {
         </div>
       </div>
       <div className="w-1/2 bg-gray-800 flex items-center justify-center">
-        {/* Background color or image can be applied here */}
-        {/* <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('/path/to/your/image.jpg')` }}> */}
+        <img src="/image/football_player_PNG78.png" alt="" />
       </div>
     </div>
   );

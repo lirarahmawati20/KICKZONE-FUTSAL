@@ -24,7 +24,7 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.GET, "/api/auth/me").authenticated();
                     auth.requestMatchers(HttpMethod.GET, "/api/auth/sign-out").authenticated();
 
-                    auth.requestMatchers(HttpMethod.GET, "/api/planets").authenticated();
+                    auth.requestMatchers(HttpMethod.GET, "/api/homeUser").authenticated();
                     auth.anyRequest().permitAll();
                 })
                  .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
