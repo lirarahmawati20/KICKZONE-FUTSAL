@@ -66,17 +66,14 @@ const SewaList = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 mt-10 md:mt-5">
               Daftar Sewa
             </h2>
-            <button className="flex items-center bg-slate-400 text-white px-4 py-2 rounded mt-4 md:mt-5">
-              <TicketPlus size={24} className="mr-2" />
-              Add Sewa
-            </button>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
                 <tr className="bg-gray-300 border-b border-gray-200">
-                  <th className="py-3 px-4 text-left">No</th>
-                  <th className="py-3 px-4 text-left">Field Name</th>
+                  <th className="py-3 px-1 text-left">No</th>
+                  <th className="py-3 px-4 text-left">Nama pemesan</th>
+                  <th className="py-3 px-4 text-left">Nama Lapangan</th>
                   <th className="py-3 px-4 text-left">Tanggal Pesan</th>
                   <th className="py-3 px-4 text-left">Lama Sewa</th>
                   <th className="py-3 px-4 text-left">Jam Mulai</th>
@@ -88,23 +85,26 @@ const SewaList = () => {
               <tbody>
                 {sewa.map((s, index) => (
                   <tr key={s.id} className="border-b border-gray-200">
-                    <td className="py-2 px-4">{index + 1}</td>
+                    <td className="py-2 px-3">{index + 1}</td>
+                    <td className="py-2 px-3">
+                      {s.user_tbl ? s.user_tbl.name : "user Name Not Available"}
+                    </td>
                     <td className="py-2 px-4">
                       {s.field_id
                         ? s.field_id.fieldName
                         : "Field Name Not Available"}
                     </td>
-                    <td className="py-2 px-4">{s.tanggalPesan}</td>
-                    <td className="py-2 px-4">{s.lamaSewa} jam</td>
-                    <td className="py-2 px-4">{s.waktuMulai}</td>
+                    <td className="py-2 px-3">{s.tanggalPesan}</td>
+                    <td className="py-2 px-3">{s.lamaSewa} jam</td>
+                    <td className="py-2 px-3">{s.waktuMulai}</td>
                     <td className="py-2 px-4">{s.waktuBerakhir}</td>
                     <td className="py-2 px-4">Rp {s.total}</td>
                     <td className="py-2 px-4">
                       <button
                         onClick={() => handleEdit(s.id)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                        className="bg-blue-500 text-white px-2 py-2 rounded "
                       >
-                        Edit
+                        Status
                       </button>
                       <button
                         onClick={() => handleDelete(s.id)}

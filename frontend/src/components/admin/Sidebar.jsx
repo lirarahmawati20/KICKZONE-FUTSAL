@@ -58,7 +58,7 @@ const Sidebar = ({ isVisible }) => {
               </div>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/historyMember" className="text-white hover:text-red-500">
               <div className="flex gap-3">
                 {" "}
@@ -66,7 +66,7 @@ const Sidebar = ({ isVisible }) => {
                 History Member
               </div>
             </Link>
-          </li>
+          </li> */}
 
           <li>
             <Link

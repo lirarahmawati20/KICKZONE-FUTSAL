@@ -30,9 +30,10 @@
 }
 
 .container-bg-2 {
-  background-color: #4f4b4b;
+  background-color: #1f2937;
   padding: 30px;
   width: 360px;
+  height: 180px;
   box-shadow: 0 20px 9px rgba(0, 0, 0, 0.1);
   font-family: 'Times New Roman', Times, serif;
   color: white;

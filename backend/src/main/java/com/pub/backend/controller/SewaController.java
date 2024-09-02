@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pub.backend.model.Field;
 import com.pub.backend.model.Sewa;
 import com.pub.backend.repository.SewaRepository;
 
@@ -62,3 +61,16 @@ public class SewaController {
         return "sewa successfully deleted";
     }
 }
+
+// http://localhost:8080/api/sewa
+// {
+//   "field_id": {
+//     "id": 7
+//   },
+//   "tanggalPesan": "2024-08-20T00:00:00",
+//   "lamaSewa": 4,
+//   "waktuMulai": "10:00",
+//   "waktuBerakhir": "12:00",
+//   "harga": 20000,
+//   "total": 40000
+// }

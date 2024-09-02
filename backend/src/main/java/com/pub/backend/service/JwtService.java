@@ -30,7 +30,7 @@ public class JwtService {
     }
 
     public String create(String payload) throws JOSEException {
-        jwsObject jwsObject = new JWSObject(new JWSHeader(JWSAlgorithm.HS256),
+        JWSObject jwsObject = new JWSObject(new JWSHeader(JWSAlgorithm.HS256),
             new Payload(payload));
         JWSSigner signer = new MACSigner(secretKey);
         jwsObject.sign(signer);

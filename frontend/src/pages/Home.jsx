@@ -1,38 +1,75 @@
-import { Instagram } from "lucide-react";
-import { Twitter } from "lucide-react";
-import { Facebook } from "lucide-react";
+import { Instagram, Twitter, Facebook, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div>
       {/* Header Section */}
-      <header className="bg-gray-800 text-white py-6 px-9 flex justify-between items-center sticky top-0 z-50">
-        <div className="text-2xl font-bold">
-          <a href="#">KICKZONE FUTSAL</a>
+      <header className="bg-gray-800 text-white py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50">
+        <div id="home" className="text-2xl font-bold">
+          <a href="#" >KICKZONE FUTSAL</a>
         </div>
-        <nav>
-          <ul className="flex space-x-6">
+        <div className="hidden lg:flex space-x-6">
+          <a href="#home" className="hover:bg-gray-600 px-4 py-2 rounded">
+            Home
+          </a>
+          <a href="#about" className="hover:bg-gray-600 px-4 py-2 rounded">
+            About
+          </a>
+          <a href="#location" className="hover:bg-gray-600 px-4 py-2 rounded">
+            Location
+          </a>
+          <a href="#contact" className="hover:bg-gray-600 px-4 py-2 rounded">
+            Contact
+          </a>
+        </div>
+        <div className="lg:hidden">
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+            className="text-white"
+          >
+            <Menu />
+          </button>
+        </div>
+        <nav
+          className={`lg:hidden ${
+            menuOpen ? "block" : "hidden"
+          } absolute top-16 left-0 w-full bg-gray-800`}
+        >
+          <ul className="flex flex-col space-y-2">
             <li>
-              <a href="Home" className="hover:text-gray-400">
+              <a href="#home" className="block px-4 py-2 hover:bg-gray-600">
                 Home
               </a>
             </li>
             <li>
-              <a href="#about" className="hover:text-gray-400">
+              <a href="#about" className="block px-4 py-2 hover:bg-gray-600">
                 About
               </a>
             </li>
             <li>
-              <a href="#location" className="hover:text-gray-400">
+              <a href="#location" className="block px-4 py-2 hover:bg-gray-600">
                 Location
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="block px-4 py-2 hover:bg-gray-600">
+                Contact
               </a>
             </li>
           </ul>
         </nav>
       </header>
 
+      {/* Hero Section */}
       <div
         className="h-screen w-full flex items-center justify-start bg-cover bg-center"
         style={{
@@ -40,34 +77,36 @@ export default function Home() {
             "url('/image/How the football trend is Shifting towards Middle East_.jpg')",
         }}
       >
-        <div className="text-left ml-12">
-          <h1 className="judul text-4xl md:text-6xl font-bold shadow-lg">
+        <div className="text-left ml-6 md:ml-12 lg:ml-24">
+          <h1 className="text-4xl md:text-6xl font-bold text-lime-700 shadow-lg">
             Sehatkan Dirimu
             <p>Dengan Berolahraga</p>
             <p>di Kickzone Futsal</p>
           </h1>
           <div className="flex justify-start space-x-4 mt-6">
-            <button className="button-login bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-700">
-               <Link to="/login">Login</Link>
-            </button>
-            <button className="button-login bg-green-500 text-white py-2 px-6 rounded hover:bg-green-700">
+            <Link
+              to="/login"
+              className="bg-slate-500 text-white py-2 px-6 rounded hover:bg-blue-700"
+            >
+              Login
+            </Link>
+            <button className="bg-green-500 text-white py-2 px-6 rounded hover:bg-green-700">
               Register
             </button>
           </div>
         </div>
       </div>
 
+      {/* About Section */}
       <section id="about" className="py-20 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center">
-          {/* Image Section */}
-          <div className="flex-1 mb-9 md:mb-0">
+          <div className="flex-1 mb-6 md:mb-0">
             <img
               src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
               alt="Lapangan Futsal"
               className="w-full h-auto md:w-96 md:h-72 object-cover rounded shadow-lg"
             />
           </div>
-          {/* Text Section */}
           <div className="flex-1 md:ml-8">
             <h2 className="text-3xl font-bold mb-4">Tentang Kami</h2>
             <p className="text-lg">
@@ -84,17 +123,13 @@ export default function Home() {
 
       {/* Location and Contact Sections */}
       <section className="py-12 px-6 bg-gray-200">
-        <div className="max-w-4xl mx-auto flex space-x-6">
-          {/* Location Section */}
-          <div id="location" className="flex-1">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:space-x-6">
+          <div id="location" className="flex-1 mb-6 md:mb-0">
             <h2 className="text-3xl font-bold mb-4">Lokasi Kami</h2>
-            <div className="flex items-center mb-6">
-              <p className="text-lg">
-                Melawai, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus
-                Ibukota Jakarta
-              </p>
-            </div>
-            {/* Google Maps Embed */}
+            <p className="text-lg mb-6">
+              Melawai, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus
+              Ibukota Jakarta
+            </p>
             <div className="w-full h-64">
               <iframe
                 className="w-full h-full rounded shadow-lg"
@@ -107,9 +142,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Contact Section */}
           <div id="contact" className="flex-1">
-            <form className="p-8 rounded ">
+            <form className="p-8 rounded bg-white shadow-lg">
               <div className="mb-4">
                 <label htmlFor="name" className="block text-gray-700">
                   Nama
@@ -207,8 +241,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      
     </div>
   );
 }

@@ -23,11 +23,24 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id; 
 
+   
     @ManyToOne
-    @JoinColumn(name = "Id_ewa", referencedColumnName = "id")
+    @JoinColumn(name = "Id_sewa", referencedColumnName = "id")
     private Sewa Id_sewa ;
     
     private String bukti; 
     private LocalDate tanggal_uplode;
     private String konfirmasi; 
 }
+
+// {
+//   "user": {
+//     "id": 1
+//   },
+//   "Id_sewa": {
+//     "id": 7
+//   },
+//   "bukti": "path/to/bukti.jpg",
+//   "tanggal_uplode": "2024-08-31",
+//   "konfirmasi": "pending"
+// }

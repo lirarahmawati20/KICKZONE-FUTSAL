@@ -1,161 +1,310 @@
 import { Link } from "react-router-dom";
-import {  HandCoins, Handshake, HeartPulse, Laugh} from "lucide-react";
+import {
+  Facebook,
+  HandCoins,
+  Handshake,
+  HeartPulse,
+  Instagram,
+  Laugh,
+  Twitter,
+} from "lucide-react";
 import HeaderUser from "./HeaderUser";
 import CarouselUser from "./CarouselUsel";
 import { useEffect, useState } from "react";
 
 export default function HomeUser() {
   const [fields, setFields] = useState([]);
-   const [isModalOpen, setIsModalOpen] = useState(false);
-   const [selectedField, setSelectedField] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedField, setSelectedField] = useState(null);
+  const [tanggalPesan, setTanggalMain] = useState("");
+  const [lamaSewa, setDurasiMain] = useState("");
+  const [waktuMulai, setWaktuMulai] = useState("");
+  const [waktuBerakhir, setWaktuBerakhir] = useState("");
 
+  // Fetching data from the backend API
   useEffect(() => {
     fetch("http://localhost:8080/api/fields")
       .then((response) => response.json())
       .then((data) => setFields(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-   const openModal = (field) => {
-     setSelectedField(field);
-     setIsModalOpen(true);
-   };
 
-   const closeModal = () => {
-     setIsModalOpen(false);
-     setSelectedField(null);
-   };
+  // Open modal for booking a field
+  const openModal = (field) => {
+    setSelectedField(field);
+    setIsModalOpen(true);
+  };
+
+  // Close booking modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedField(null);
+    setTanggalMain("");
+    setDurasiMain("");
+    setWaktuMulai("");
+    setWaktuBerakhir("");
+  };
+
+  // Handle booking form submission
+  const handleBooking = () => {
+    const bookingData = {
+      id: null,
+      field_id: selectedField.id,
+      tanggalPesan: tanggalPesan,
+      lamaSewa: lamaSewa,
+      waktuMulai: waktuMulai,
+      waktuBerakhir: waktuBerakhir,
+    };
+
+    console.log("Booking Data:", bookingData); // Debugging
+
+    fetch("http://localhost:8080/api/sewa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Parsing response as JSON
+      })
+      .then(() => {
+        alert("Pemesanan berhasil!");
+        closeModal(); // Close modal after successful booking
+        window.location.reload(); // Reload page to refresh data
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+        alert("Pemesanan gagal. Silakan coba lagi.");
+      });
+  };
 
   return (
     <>
       <HeaderUser />
       <CarouselUser />
 
-      <div className="px-6 py-8 bg-white">
-        <div className="flex justify-around mb-6">
-          <div className="text-center max-w-xs rounded-lg container-bg-2">
-            <Handshake size={30} className="text-white mx-auto " />
-            <p className="font-semibold">KENYAMANAN </p>
+      <div className="px-6 py-8 bg-slate-100">
+        <div className="flex flex-wrap justify-around mb-6 gap-6">
+          <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
+            <Handshake size={30} className="text-white mx-auto mb-2" />
+            <p className="font-semibold">KENYAMANAN</p>
             <p>Mengutamakan kenyamanan penyewa</p>
           </div>
 
-          <div className="text-center max-w-xs rounded-lg container-bg-2 ">
-            <Laugh size={30} className="text-white mx-auto" />
-            <p className="font-semibold">SETRATEGIS</p>
-            <p>Tersedia tempat yang setrategis </p>
+          <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
+            <Laugh size={30} className="text-white mx-auto mb-2" />
+            <p className="font-semibold">STRATEGIS</p>
+            <p>Tersedia tempat yang strategis</p>
           </div>
 
-          <div className="text-center max-w-xsrounded-lg  container-bg-2 ">
-            <HandCoins size={30} className="text-white mx-auto" />
+          <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
+            <HandCoins size={30} className="text-white mx-auto mb-2" />
             <p className="font-semibold">FREE</p>
             <p>Setiap kendaraan free parkir</p>
           </div>
 
-          <div className="text-center max-w-xsrounded-lg  container-bg-2 ">
-            <HeartPulse size={30} className="text-white mx-auto" />
-            <p className="font-semibold">FREE TWO</p>
+          <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
+            <HeartPulse size={30} className="text-white mx-auto mb-2" />
+            <p className="font-semibold">FREE DRINKS</p>
             <p>Menyediakan free minuman 3 botol</p>
           </div>
         </div>
 
-        <div className="text-center mb-6 mt-36 px-7">
-          <p className="text-4xl font-semibold">Lapangan Futsal Kickzone</p>
-          <p className="text-xl mt-7">
-            Lapangan futsal kami menawarkan kenyamanan dan kualitas terbaik,
-            dengan fasilitas modern yang menjamin pengalaman bermain yang
-            menyenangkan. Permukaan lapangan yang halus dan aman membuat
-            pelanggan tertarik untuk kembali bermain, sementara area penonton
-            yang nyaman memungkinkan dukungan penuh dari teman dan keluarga.
+        {/* Introduction Section */}
+        <div className="text-center mb-6 mt-28 px-7 mx-auto">
+          <p className="text-4xl font-semibold font-serif">
+            Lapangan Kickzone Futsal
+          </p>
+          <p className="text-2xl mt-7 font-serif">
+            Nikmati pengalaman bermain sepak bola yang tak tertandingi dengan
+            menyewa lapangan kami! Lapangan kami dirancang untuk memberikan
+            performa terbaik dengan permukaan yang terawat dan fasilitas modern.
+            Baik untuk pertandingan santai bersama teman atau turnamen resmi,
+            lapangan kami menyediakan lingkungan yang nyaman dan mendukung.
+            Dapatkan akses mudah dengan lokasi strategis dan parkir yang
+            memadai. Bergabunglah dengan kami dan ciptakan momen berharga di
+            lapangan sepak bola terbaik. Hubungi kami sekarang untuk pemesanan
+            dan rasakan sendiri perbedaannya!
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-8 justify-center mt-36">
+        {/* Fields Section */}
+        <div
+          id="lapangan"
+          className="flex flex-wrap gap-8 justify-center mt-28 font-serif"
+        >
           {fields.map((field, index) => (
             <div
-              className="bg-white border border-gray-200 rounded-lg p-5 text-center w-1/4"
+              className="border rounded-lg p-5 text-center w-full sm:w-80 md:w-1/3 lg:w-1/4 shadow-2xl mb-10 bg-slate-200"
               key={index}
             >
               <img
                 src={field.photo}
                 alt={field.fieldName}
-                className="w-full h-52 object-cover mb-4"
+                className="w-full h-52 object-cover mb-4 mt-2"
               />
               <h2 className="text-lg font-semibold">{field.fieldName}</h2>
               <p className="text-gray-600">Rp {field.price}</p>
               <p>{field.description}</p>
-              <div className="m-5 gap-5 flex justify-center">
-                <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                  <Link to="/productUser">jadwal</Link>
-                </button>
+              <div className="mt-4 flex flex-wrap justify-center gap-4">
+                <Link to="/user/jadwal">
+                  <button className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-400">
+                    Jadwal
+                  </button>
+                </Link>
                 <button
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-400"
                   onClick={() => openModal(field)}
                 >
-                  pesan
+                  Pesan
                 </button>
               </div>
             </div>
           ))}
         </div>
       </div>
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-10 ">
-            <img
-              src={selectedField?.photo}
-              alt={selectedField?.fieldName}
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h2 className="text-xl font-bold mb-4">
-              Pesan {selectedField?.fieldName}
-            </h2>
 
-            <p>Harga: Rp {selectedField?.price}</p>
-            {/* Form pemesanan dengan inputan bersampingan */}
-            <div className="mt-4 flex gap-4">
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-6 px-6 font-serif">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
+          {/* Contact Information */}
+          <div className="mb-6 md:mb-0">
+            <h3 className="text-xl font-semibold mb-2">Kontak Kami</h3>
+            <p className="text-lg">
+              Jl. Melawai, Kec. Kby. Baru, Kota Jakarta Selatan
+            </p>
+            <p className="text-lg">Daerah Khusus Ibukota Jakarta</p>
+            <p className="text-lg">Email: info@kickzonefutsal.com</p>
+            <p className="text-lg">Telepon: 0838-2108-1737</p>
+          </div>
+
+          {/* Social Media Links */}
+          <div className="flex space-x-4 mb-6 md:mb-0">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-white"
+            >
+              <Facebook />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-white"
+            >
+              <Twitter />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-white"
+            >
+              <Instagram />
+            </a>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-center">
+            <p className="text-lg">
+              &copy; {new Date().getFullYear()} Kickzone Futsal. All rights
+              reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {isModalOpen && selectedField && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg mx-2 w-full h-auto">
+            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+              Booking {selectedField.fieldName}
+            </h2>
+            <img
+              src={selectedField.photo}
+              alt={selectedField.fieldName}
+              className="w-full h-40 object-cover rounded mb-4"
+            />
+            <div className="mb-4">
+              <label className="block text-gray-700 font-medium mb-1">
+                Nama Lapangan:
+              </label>
+              <p className="text-gray-900">{selectedField.fieldName}</p>
+            </div>
+            <div className="flex gap-4 mb-4">
               <div className="flex-1">
-                <label className="block mb-2">Tanggal Main</label>
+                <label className="block text-gray-700 font-medium mb-1">
+                  Tanggal Main:
+                </label>
                 <input
                   type="date"
-                  className="border border-gray-300 p-2 rounded w-full"
+                  value={tanggalPesan}
+                  onChange={(e) => setTanggalMain(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
                 />
               </div>
-              <div className="flex-1">
-                <label className="block mb-2">Waktu Mulai</label>
-                <input
-                  type="time"
-                  className="border border-gray-300 p-2 rounded w-full"
-                />
-              </div>
-            </div>
-            <div className="mt-4 flex gap-4">
-              <div className="flex-1">
-                <label className="block mb-2">Waktu Berakhir</label>
-                <input
-                  type="time"
-                  className="border border-gray-300 p-2 rounded w-full"
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block mb-2">Lama Main (jam)</label>
-                <input
-                  type="number"
-                  className="border border-gray-300 p-2 rounded w-full"
-                  min="0"
-                  step="0.5"
-                  placeholder="Masukkan lama main dalam jam"
-                />
+
+              <div className="flex gap-4 mb-4">
+                <div className="flex-1">
+                  <label className="block text-gray-700 font-medium mb-1">
+                    Durasi Main (jam):
+                  </label>
+                  <input
+                    type="number"
+                    value={lamaSewa}
+                    onChange={(e) => setDurasiMain(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="mt-6 flex justify-between">
+            <div className="flex gap-4 mb-4">
+              <div className="flex-1">
+                <label className="block text-gray-700 font-medium mb-1">
+                  Waktu Mulai:
+                </label>
+                <input
+                  type="time"
+                  value={waktuMulai}
+                  onChange={(e) => setWaktuMulai(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <label className="block text-gray-700 font-medium mb-1">
+                  Waktu Berakhir:
+                </label>
+                <input
+                  type="time"
+                  value={waktuBerakhir}
+                  onChange={(e) => setWaktuBerakhir(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex justify-between mt-6">
               <button
-                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                onClick={handleBooking}
+              >
+                Pesan
+              </button>
+              <button
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300"
                 onClick={closeModal}
               >
-                Batal
-              </button>
-              <button className="bg-green-500 px-4 py-2 text-white rounded hover:bg-green-600">
-                Pesan
+                Tutup
               </button>
             </div>
           </div>

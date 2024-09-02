@@ -10,24 +10,53 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      email === "admin@example.com" &&
-      password === "adminpassword" &&
-      role === "admin"
-    ) {
-      alert("Admin login successful!");
-      navigate("/admin/homeAdmin"); // Redirect to home page for admin
-    } else if (
-      email === "user@example.com" &&
-      password === "password" &&
-      role === "user"
-    ) {
-      alert("User login successful!");
-      navigate("/user/homeUser"); // Redirect to home page for user
-    } else {
-      setError("Invalid credentials or role");
-    }
+
+    fetch(
+      `http://localhost:8080/api/auth/sign-in?email=${email}&password=${password}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          fetch(`http://localhost:8080/api/auth/me`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              navigate("/admin/homeAdmin");
+            })
+            .catch((error) =>
+              console.error("Error fetching field data:", error)
+            );
+        } else {
+          throw new Error("Failed to add job");
+        }
+      })
+      .catch((error) => console.error("Error adding job:", error));
   };
+
+  // if (
+  //   email === "admin@example.com" &&
+  //   password === "adminpassword" &&
+  //   role === "admin"
+  // ) {
+  //   alert("Admin login successful!");
+  //   navigate("/admin/homeAdmin"); // Redirect to home page for admin
+  // } else if (
+  //   email === "user@example.com" &&
+  //   password === "password" &&
+  //   role === "user"
+  // ) {
+  //   alert("User login successful!");
+  //   navigate("/user/homeUser"); // Redirect to home page for user
+  // } else {
+  //   setError("Invalid credentials or role");
+  // }
+  // };
 
   return (
     <div className="flex h-screen">

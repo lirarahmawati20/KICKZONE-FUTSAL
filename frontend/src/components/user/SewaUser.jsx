@@ -81,17 +81,6 @@ export default function SewaUser() {
           </button>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
       
     </div>
   );

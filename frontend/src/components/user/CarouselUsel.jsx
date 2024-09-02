@@ -1,17 +1,15 @@
 export default function CarouselUser() {
   return (
-    <div className="relative w-full h-96 flex justify-center items-center overflow-hidden  py-8">
+    <div className="relative w-full h-[32rem] flex justify-center items-center overflow-hidden py-8 bg-slate-100 ">
       <video
         autoPlay
         muted
         loop
-        className="object-cover"
+        className="object-cover h-full w-full"
         style={{
           width: "calc(100% - 20px)",
-          maxHeight: "100%",
           marginLeft: "50px",
           marginRight: "50px",
-          // marginTop: "20px,",
         }}
       >
         <source src="/image/videoplayback.mp4" type="video/mp4" />

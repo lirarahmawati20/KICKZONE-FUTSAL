@@ -14,10 +14,11 @@ import CarouselUser from './components/user/CarouselUsel.jsx';
 import HomeUser from './components/user/HomeUser.jsx';
 import FieldList from './components/Admin/FieldList.jsx';
 import SewaList from './components/admin/SewaList.jsx';
-import Payment from './components/user/Payment.jsx';
 import SewaUser from './components/user/SewaUser.jsx';
 import DataMember from './components/admin/DataMember.jsx';
 import DataAdmin from './components/admin/DataAdmin.jsx';
+import Pembayaran from './components/user/Pembayaran.jsx';
+import Jadwal from './components/user/Jadwal.jsx';
 
 const router = createBrowserRouter([
   {
@@ -75,13 +76,14 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/user/payment",
-        element: <Payment />,
+        path: "/user/pembayaran",
+        element: <Pembayaran />,
       },
       { path: "/use/sewauser", element: <SewaUser /> },
 
       { path: "/admin/dataMember", element: <DataMember /> },
       { path: "/admin/dataAdmin", element: <DataAdmin /> },
+      { path: "/user/jadwal", element: <Jadwal /> },
     ],
   },
 ]);

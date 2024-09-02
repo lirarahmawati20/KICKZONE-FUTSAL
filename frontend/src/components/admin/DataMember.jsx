@@ -1,56 +1,49 @@
-import { TicketPlus } from "lucide-react";
 import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DataMember = () => {
-//   const [fields, setFields] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-   const [showMenu, setShowMenu] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [showMenu, setShowMenu] = useState(false);
 
-//   useEffect(() => {
-//     fetch("http://localhost:8080/api/fields")
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         setFields(data);
-//       })
-//       .catch((error) => {
-//         console.error("Terjadi kesalahan saat mengambil data:", error);
-//         setError(error);
-//       });
-//   }, []);
-
-  // Fungsi untuk menghapus field
-//   const handleDelete = (id) => {
-//     fetch(`http://localhost:8080/api/fields/${id}`, {
-//       method: "DELETE",
-//     })
-//       .then((response) => {
-//         if (response.ok) {
-//           setFields(fields.filter((field) => field.id !== id));
-//         } else {
-//           throw new Error("Failed to delete");
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Terjadi kesalahan saat menghapus data:", error);
-//       });
-//   };
+useEffect(() => {
+  fetch("http://localhost:8080/api/auth/register")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Data received:", data); // Log data untuk debugging
+      setUsers(data);
+    })
+    .catch((error) => {
+      console.error("Terjadi kesalahan saat mengambil data:", error);
+    });
+}, []);
 
 
-
+  const handleDelete = (id) => {
+    fetch(`http://localhost:8080/api/outh/register/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setUsers(users.filter((user) => user.id !== id));
+        } else {
+          throw new Error("Failed to delete");
+        }
+      })
+      .catch((error) => {
+        console.error("Terjadi kesalahan saat menghapus data:", error);
+      });
+  };
 
   // Toggle menu sidebar
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
-
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -73,13 +66,29 @@ const DataMember = () => {
                 <tr className="bg-gray-400 border-b border-gray-200">
                   <th className="py-2 px-4 text-left">No</th>
                   <th className="py-2 px-4 text-left">Nama Lengkap</th>
-                  <th className="py-2 px-4 text-left">Jenis Kelamin</th>
                   <th className="py-2 px-4 text-left">Email</th>
-                  <th className="py-2 px-4 text-left">No hp</th>
+                  <th className="py-2 px-4 text-left">Role</th>
                   <th className="py-2 px-4 text-left">Aksi</th>
                 </tr>
               </thead>
-              
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={user.id} className="border-b border-gray-200">
+                    <td className="py-2 px-4">{index + 1}</td>
+                    <td className="py-2 px-4">{user.name}</td>
+                    <td className="py-2 px-4">{user.email}</td>
+                    <td className="py-2 px-4">{user.role}</td>
+                    <td className="py-2 px-4">
+                      <button
+                        onClick={() => handleDelete(user.id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </main>
