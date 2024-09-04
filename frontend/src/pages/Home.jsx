@@ -12,8 +12,16 @@ export default function Home() {
   return (
     <div>
       {/* Header Section */}
-      <header className="bg-gray-800 text-white py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50 ">
-        <div id="home" className="text-2xl font-bold">
+      <header className="bg-gray-800 text-white  px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50 ">
+        <div
+          id="home"
+          className="flex items-center text-3xl font-bold font-serif"
+        >
+          <img
+            src="/image/th-removebg-preview.png"
+            alt="Kickzone Logo"
+            className="h-24 w-24 mr-2"
+          />
           <a href="#">KICKZONE FUTSAL</a>
         </div>
         <div className="hidden lg:flex space-x-6 font-serif">
@@ -73,12 +81,11 @@ export default function Home() {
       <div
         className="h-screen w-full flex items-center justify-start bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('/image/ad6de2caac41059a5aa5c90f1f716542fe357c0c.webp')",
+          backgroundImage: "url('/image/wp2124265 (1).jpg')",
         }}
       >
         <div className="text-left ml-6 md:ml-12 lg:ml-24 italic font-serif">
-          <h1 className="text-4xl md:text-6xl font-bold text-white shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 shadow-lg">
             Sehatkan Dirimu
             <p>Dengan Berolahraga</p>
             <p>di Kickzone Futsal</p>
@@ -90,9 +97,13 @@ export default function Home() {
             >
               Login
             </Link>
-            <button className="bg-green-700 text-white py-2 px-10 rounded hover:bg-green-500">
+
+            <Link
+              to="/register"
+              className="bg-green-700 text-white py-2 px-10 rounded hover:bg-green-500"
+            >
               Register
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -100,28 +111,28 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center">
-          <div className="flex-1 mb-6 md:mb-0 relative">
+          <div className="flex-1 mb-9 md:mb-0 relative">
             <div className="relative">
               <img
-                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                src="/image/pngtree-sport-football-background-picture-image_2446912.jpg"
                 alt="Lapangan Futsal"
                 className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg"
               />
               <img
-                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                src="/image/pngtree-sport-football-background-picture-image_2446912.jpg"
                 alt="Lapangan Futsal"
                 className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg absolute top-2 left-2 md:top-5 md:left-5"
               />
               <img
-                src="/image/Jumlah-Pemain-Sepak-Bola-dalam-Pertandingan-Resmi-Lengkap-dengan-Posisi-dan-Fungsinya.jpg"
+                src="/image/pngtree-sport-football-background-picture-image_2446912.jpg"
                 alt="Lapangan Futsal"
                 className="w-full h-auto md:w-96 md:h-80 object-cover rounded shadow-lg absolute top-4 left-4 md:top-10 md:left-10"
               />
             </div>
           </div>
           <div className="flex-1 md:ml-8 font-serif">
-            <h2 className="text-3xl font-bold mb-4">Tentang Kami</h2>
-            <p className="text-lg">
+            <h2 className="text-3xl font-bold mb-9">Tentang Kami</h2>
+            <p className="text-lg mb-9">
               Kickzone Futsal adalah pusat olahraga yang didedikasikan untuk
               meningkatkan kesehatan dan kebugaran masyarakat melalui futsal.
               Kami menyediakan fasilitas futsal modern yang nyaman, serta
@@ -154,9 +165,9 @@ export default function Home() {
           </div>
 
           <div id="contact" className="flex-1">
-            <form className="p-8 rounded bg-white shadow-lg">
+            <form className="p-8 rounded ">
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700">
+                <label htmlFor="name" className="block text-slate-950">
                   Nama
                 </label>
                 <input

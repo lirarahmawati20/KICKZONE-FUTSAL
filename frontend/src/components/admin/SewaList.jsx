@@ -1,11 +1,9 @@
-import { TicketPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import HeaderAdmin from "./HeaderAdmin";
 import Sidebar from "./Sidebar";
 
 const SewaList = () => {
   const [sewa, setSewa] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -19,12 +17,10 @@ const SewaList = () => {
       })
       .then((data) => {
         setSewa(data);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Terjadi kesalahan saat mengambil data:", error);
         setError(error);
-        // setLoading(false);
       });
   }, []);
 
@@ -44,16 +40,12 @@ const SewaList = () => {
       });
   };
 
-  const handleEdit = (id) => {
-    alert(`Edit sewa dengan ID: ${id}`);
-  };
-
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen font-serif">
       <Sidebar isVisible={showMenu} />
       <div
         className={`flex-1 ml-0 lg:ml-64 mt-16 p-6 transition-transform duration-300 ${
@@ -68,47 +60,74 @@ const SewaList = () => {
             </h2>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200">
+            <table className="min-w-full bg-white border border-gray-300">
               <thead>
-                <tr className="bg-gray-300 border-b border-gray-200">
-                  <th className="py-3 px-1 text-left">No</th>
-                  <th className="py-3 px-4 text-left">Nama pemesan</th>
-                  <th className="py-3 px-4 text-left">Nama Lapangan</th>
-                  <th className="py-3 px-4 text-left">Tanggal Pesan</th>
-                  <th className="py-3 px-4 text-left">Lama Sewa</th>
-                  <th className="py-3 px-4 text-left">Jam Mulai</th>
-                  <th className="py-3 px-4 text-left">Jam Berakhir</th>
-                  <th className="py-3 px-4 text-left">Total</th>
-                  <th className="py-3 px-4 text-left">Actions</th>
+                <tr className="bg-gray-800 border-b border-gray-300 text-white">
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    No
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Nama pemesan
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Nama Lapangan
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Tanggal Pesan
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Lama Sewa
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Jam Mulai
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Jam Berakhir
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Total
+                  </th>
+                  <th className="py-3 px-4 border border-gray-300 text-left">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {sewa.map((s, index) => (
-                  <tr key={s.id} className="border-b border-gray-200">
-                    <td className="py-2 px-3">{index + 1}</td>
-                    <td className="py-2 px-3">
-                      {s.user_tbl ? s.user_tbl.name : "user Name Not Available"}
+                  <tr key={s.id} className="border-b border-gray-300">
+                    <td className="py-2 px-4 border border-gray-300">
+                      {index + 1}
                     </td>
-                    <td className="py-2 px-4">
+                    <td className="py-2 px-4 border border-gray-300">
+                      {s.user ? s.user.username : "User Name Not Available"}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300">
                       {s.field_id
                         ? s.field_id.fieldName
                         : "Field Name Not Available"}
                     </td>
-                    <td className="py-2 px-3">{s.tanggalPesan}</td>
-                    <td className="py-2 px-3">{s.lamaSewa} jam</td>
-                    <td className="py-2 px-3">{s.waktuMulai}</td>
-                    <td className="py-2 px-4">{s.waktuBerakhir}</td>
-                    <td className="py-2 px-4">Rp {s.total}</td>
-                    <td className="py-2 px-4">
-                      <button
-                        onClick={() => handleEdit(s.id)}
-                        className="bg-blue-500 text-white px-2 py-2 rounded "
-                      >
+                    <td className="py-2 px-4 border border-gray-300">
+                      {s.tanggalPesan}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300">
+                      {s.lamaSewa} jam
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300">
+                      {s.waktuMulai}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300">
+                      {s.waktuBerakhir}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300">
+                      Rp {s.total}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-300 flex space-x-2">
+                      <button className="bg-blue-500 text-white px-3 py-2 rounded">
                         Status
                       </button>
                       <button
                         onClick={() => handleDelete(s.id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded"
+                        className="bg-red-500 text-white px-3 py-2 rounded"
                       >
                         Delete
                       </button>

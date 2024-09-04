@@ -52,7 +52,7 @@ export default function SewaUser() {
 
         <p>Harga: Rp {field.price}</p>
         <div className="mt-4">
-          <label className="block mb-2">Tanggal Main</label>
+          <label className="block mb-2">Tanggal Main {field.price}</label>
           <input
             type="date"
             className="border border-gray-300 p-2 rounded w-full"
@@ -81,7 +81,6 @@ export default function SewaUser() {
           </button>
         </div>
       </div>
-      
     </div>
   );
 }

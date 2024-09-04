@@ -1,5 +1,8 @@
 package com.pub.backend.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pub.backend.dto.SewaDto;
+import com.pub.backend.model.Field;
 import com.pub.backend.model.Sewa;
+import com.pub.backend.repository.FieldRepository;
 import com.pub.backend.repository.SewaRepository;
 
 
@@ -24,6 +30,9 @@ public class SewaController {
 
     @Autowired
     SewaRepository repository;
+
+    @Autowired
+    FieldRepository repositoryField;
 
     @GetMapping
     public List<Sewa> getAll() {
@@ -42,9 +51,24 @@ public class SewaController {
 
 
     @PostMapping
-    public String create(@RequestBody Sewa sewa) {
+    public String create(@RequestBody SewaDto sewaDto) {
+         Field field = repositoryField.findById(sewaDto.getField_id().getId()).orElse(null);
+        if (field != null) {
+        Sewa sewa= new Sewa();
+        sewa.setField_id(sewaDto.getField_id());
+        sewa.setLamaSewa(sewaDto.getLamaSewa());
+        sewa.setUser_id(sewaDto.getUser_id());
+        sewa.setWaktuBerakhir(sewaDto.getWaktuBerakhir());
+        sewa.setWaktuMulai(sewaDto.getWaktuMulai());
+        sewa.setTotal(field.getPrice()*sewaDto.getLamaSewa());
+        sewa.setHarga(field.getPrice());
+        sewa.setTanggalPesan(convertToLocalDateTime(sewaDto.getTanggalPesan()));
         repository.save(sewa);
         return "sewa successfully added";
+        } else {
+            return "Field with ID " + sewaDto.getField_id().getId()+ " not found";
+        }
+       
     }
 
 
@@ -60,6 +84,11 @@ public class SewaController {
         repository.deleteById(id);
         return "sewa successfully deleted";
     }
+
+    public static LocalDateTime convertToLocalDateTime(String dateStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatter);
+        return date.atStartOfDay();}
 }
 
 // http://localhost:8080/api/sewa

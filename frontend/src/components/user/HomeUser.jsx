@@ -49,7 +49,8 @@ export default function HomeUser() {
   const handleBooking = () => {
     const bookingData = {
       id: null,
-      field_id: selectedField.id,
+      field_id:{id:selectedField.id},
+      user:{id:17},
       tanggalPesan: tanggalPesan,
       lamaSewa: lamaSewa,
       waktuMulai: waktuMulai,
@@ -65,13 +66,7 @@ export default function HomeUser() {
       },
       body: JSON.stringify(bookingData),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // Parsing response as JSON
-      })
-      .then(() => {
+      .then(()=> {
         alert("Pemesanan berhasil!");
         closeModal(); // Close modal after successful booking
         window.location.reload(); // Reload page to refresh data
@@ -160,7 +155,7 @@ export default function HomeUser() {
                   className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-400"
                   onClick={() => openModal(field)}
                 >
-                  Pesan
+                  Sewa
                 </button>
               </div>
             </div>

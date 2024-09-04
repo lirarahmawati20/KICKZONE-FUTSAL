@@ -13,7 +13,7 @@ const HomeAdmin = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen font-serif">
       <Sidebar isVisible={showMenu} />
       <div
         className={`flex-1 ml-0 lg:ml-64 mt-16 p-6 transition-transform duration-300 ${
@@ -22,8 +22,8 @@ const HomeAdmin = () => {
       >
         <HeaderAdmin onMenuClick={handleMenuClick} showMenu={showMenu} />
         <main>
-          <h1 className="text-3xl font-bold mb-6 mt-5 ml-">Home Admin</h1>
-          
+          <h1 className="text-4xl font-bold mb-6 mt-5 ml-">Home Admin</h1>
+
           <div className="px-6 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {/* Existing Boxes */}

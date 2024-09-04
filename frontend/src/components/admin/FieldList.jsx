@@ -103,7 +103,7 @@ const FieldList = () => {
 
   console.log(fields);
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen font-serif">
       <Sidebar isVisible={showMenu} />
       <div
         className={`flex-1 ml-0 lg:ml-64 mt-16 p-6 transition-transform duration-300 ${
@@ -118,7 +118,7 @@ const FieldList = () => {
             </h2>
             <button
               onClick={handleAdd}
-              className="flex items-center bg-slate-400 text-white px-4 py-2 rounded mt-4 md:mt-2"
+              className="flex items-center bg-slate-800 text-white px-4 py-2 rounded mt-4 md:mt-2"
             >
               <TicketPlus size={24} className="mr-2" />
               Add Field
@@ -127,7 +127,7 @@ const FieldList = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
-                <tr className="bg-gray-400 border-b border-gray-200">
+                <tr className="bg-gray-800 border-b border-gray-200 text-white">
                   <th className="py-2 px-4 text-left">No</th>
                   <th className="py-2 px-4 text-left">Photo</th>
                   <th className="py-2 px-4 text-left">Field Name</th>
@@ -174,7 +174,7 @@ const FieldList = () => {
 
       {/* Modal untuk tambah/edit field */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 font-serif">
           <div className="bg-white p-6 rounded-lg w-96">
             <h2 className="text-2xl font-bold mb-4">
               {isEditing ? "Edit Field" : "Add Field"}

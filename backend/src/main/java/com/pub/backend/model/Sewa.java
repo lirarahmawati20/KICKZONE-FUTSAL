@@ -22,8 +22,8 @@ public class Sewa {
     private Long id;
    
     @ManyToOne
-    @JoinColumn(name = "Id_user", referencedColumnName = "id")
-    private User user_tbl ;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User  user_id ;
 
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
@@ -35,8 +35,8 @@ public class Sewa {
 
     private LocalTime waktuMulai;
     private LocalTime waktuBerakhir;
-    private Integer harga;
-    private Integer total;
+    private Double harga;
+    private Double total;
 }
 
 
