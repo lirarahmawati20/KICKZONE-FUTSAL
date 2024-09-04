@@ -1,198 +1,198 @@
-package com.pub.backend.service;
+// package com.pub.backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.authentication.AuthenticationManager;
+// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.pub.backend.repository.UserRepository;
+// import com.pub.backend.repository.UserRepository;
 
-public class UserService {
-     @Autowired
-    private UserRepository userRepository;
+// public class UserService {
+//      @Autowired
+//     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//     @Autowired
+//     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JWTUtils jwtUtils;
+//     @Autowired
+//     private JWTUtils jwtUtils;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+//     @Autowired
+//     private AuthenticationManager authenticationManager;
 
 
    
-    public Response register(User user) {
-        Response response = new Response();
+//     public Response register(User user) {
+//         Response response = new Response();
 
-        try {
-            if (user.getRole() == null || user.getRole().isBlank()) {
-                user.setRole("USER");
-            }
-            if (userRepository.existsByEmail(user.getEmail())) {
-                throw new OurException(user.getEmail() + " " + "Already Exists");
-            }
+//         try {
+//             if (user.getRole() == null || user.getRole().isBlank()) {
+//                 user.setRole("USER");
+//             }
+//             if (userRepository.existsByEmail(user.getEmail())) {
+//                 throw new OurException(user.getEmail() + " " + "Already Exists");
+//             }
 
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User savedUser = userRepository.save(user);
-            UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
+//             user.setPassword(passwordEncoder.encode(user.getPassword()));
+//             User savedUser = userRepository.save(user);
+//             UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
 
-            response.setStatusCode(200);
-            response.setUser(userDTO);
-            response.setMessage("successful");
+//             response.setStatusCode(200);
+//             response.setUser(userDTO);
+//             response.setMessage("successful");
 
-        } catch (OurException e) {
-            response.setStatusCode(400);
-            response.setMessage(e.getMessage());
+//         } catch (OurException e) {
+//             response.setStatusCode(400);
+//             response.setMessage(e.getMessage());
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Saving a User" + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error Saving a User" + e.getMessage());
 
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
   
-    public Response login(LoginRequest loginRequest) {
-        Response response = new Response();
+//     public Response login(LoginRequest loginRequest) {
+//         Response response = new Response();
 
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-            var user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new OurException("User Not Found"));
-            var token = jwtUtils.generateToken(user);
+//         try {
+//             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+//             var user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new OurException("User Not Found"));
+//             var token = jwtUtils.generateToken(user);
 
-            response.setToken(token);
-            response.setExpirationTime("7 days");
-            response.setRole(user.getRole());
-            response.setMessage("successful");
-            response.setStatusCode(200);
+//             response.setToken(token);
+//             response.setExpirationTime("7 days");
+//             response.setRole(user.getRole());
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
 
-        } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+//         } catch (OurException e) {
+//             response.setStatusCode(404);
+//             response.setMessage(e.getMessage());
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Logging in " + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error Logging in " + e.getMessage());
 
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
  
-    public Response getAllUsers() {
-        Response response = new Response();
+//     public Response getAllUsers() {
+//         Response response = new Response();
 
-        try {
-            List<User> userList = userRepository.findAll();
-            List<UserDTO> userDTOList = Utils.mapUserListEntityToUserListDTO(userList);
+//         try {
+//             List<User> userList = userRepository.findAll();
+//             List<UserDTO> userDTOList = Utils.mapUserListEntityToUserListDTO(userList);
 
-            response.setUserList(userDTOList);
-            response.setMessage("successful");
-            response.setStatusCode(200);
+//             response.setUserList(userDTOList);
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error getting all users " + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error getting all users " + e.getMessage());
 
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
    
-    public Response getUSerBookingHistory(String userId) {
-        Response response = new Response();
+//     public Response getUSerBookingHistory(String userId) {
+//         Response response = new Response();
 
-        try {
-            User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
-            UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
+//         try {
+//             User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
+//             UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
 
-            response.setMessage("successful");
-            response.setStatusCode(200);
-            response.setUser(userDTO);
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
+//             response.setUser(userDTO);
 
-        } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+//         } catch (OurException e) {
+//             response.setStatusCode(404);
+//             response.setMessage(e.getMessage());
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error getting user bookings in " + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error getting user bookings in " + e.getMessage());
 
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
 
-    public Response deleteUser(String userId) {
-        Response response = new Response();
+//     public Response deleteUser(String userId) {
+//         Response response = new Response();
 
-        try {
-            userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
-            userRepository.deleteById(Long.valueOf(userId));
+//         try {
+//             userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
+//             userRepository.deleteById(Long.valueOf(userId));
 
-            response.setMessage("successful");
-            response.setStatusCode(200);
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
 
-        } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+//         } catch (OurException e) {
+//             response.setStatusCode(404);
+//             response.setMessage(e.getMessage());
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error deleting a user " + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error deleting a user " + e.getMessage());
 
-        }
-        return response;
-    }
-
- 
-    public Response getUserById(String userId) {
-        Response response = new Response();
-
-        try {
-            User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
-            UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
-
-            response.setMessage("successful");
-            response.setStatusCode(200);
-            response.setUser(userDTO);
-
-        } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
-
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error getting a user by id " + e.getMessage());
-
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
  
-    public Response getMyInfo(String email) {
-        Response response = new Response();
+//     public Response getUserById(String userId) {
+//         Response response = new Response();
 
-        try {
-            User user = userRepository.findByEmail(email).orElseThrow(()-> new OurException("User Not Found"));
-            UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
+//         try {
+//             User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
+//             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
 
-            response.setMessage("successful");
-            response.setStatusCode(200);
-            response.setUser(userDTO);
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
+//             response.setUser(userDTO);
 
-        } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+//         } catch (OurException e) {
+//             response.setStatusCode(404);
+//             response.setMessage(e.getMessage());
 
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error getting a user info " + e.getMessage());
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error getting a user by id " + e.getMessage());
 
-        }
-        return response;
-    }
+//         }
+//         return response;
+//     }
 
-}
+ 
+//     public Response getMyInfo(String email) {
+//         Response response = new Response();
+
+//         try {
+//             User user = userRepository.findByEmail(email).orElseThrow(()-> new OurException("User Not Found"));
+//             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
+
+//             response.setMessage("successful");
+//             response.setStatusCode(200);
+//             response.setUser(userDTO);
+
+//         } catch (OurException e) {
+//             response.setStatusCode(404);
+//             response.setMessage(e.getMessage());
+
+//         } catch (Exception e) {
+//             response.setStatusCode(500);
+//             response.setMessage("Error getting a user info " + e.getMessage());
+
+//         }
+//         return response;
+//     }
+
+// }
