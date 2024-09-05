@@ -3,8 +3,6 @@ package com.pub.backend.model;
 
 
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +27,7 @@ public class Payment {
     private Sewa Id_sewa ;
     
     private String bukti; 
-    private LocalDate tanggal_uplode;
+    // private LocalDate tanggal_uplode;
     private String konfirmasi; 
 }
 

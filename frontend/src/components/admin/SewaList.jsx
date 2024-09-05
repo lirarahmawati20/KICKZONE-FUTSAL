@@ -1,28 +1,11 @@
 import { useEffect, useState } from "react";
-import HeaderAdmin from "./HeaderAdmin";
 import Sidebar from "./Sidebar";
+import HeaderAdmin from "./HeaderAdmin";
 
 const SewaList = () => {
   const [sewa, setSewa] = useState([]);
   const [error, setError] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/sewa")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSewa(data);
-      })
-      .catch((error) => {
-        console.error("Terjadi kesalahan saat mengambil data:", error);
-        setError(error);
-      });
-  }, []);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:8080/api/sewa/${id}`, {
@@ -43,6 +26,21 @@ const SewaList = () => {
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
+
+  useEffect(() => {
+    const fetchFields = async () => {
+      // const token = localStorage.getItem('token');
+      const response = await fetch("http://localhost:8080/api/sewa", {
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      });
+      const res = await response.json();
+      setSewa(res);
+    };
+    fetchFields();
+  });
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen font-serif">
@@ -93,47 +91,48 @@ const SewaList = () => {
                 </tr>
               </thead>
               <tbody>
-                {sewa.map((s, index) => (
-                  <tr key={s.id} className="border-b border-gray-300">
-                    <td className="py-2 px-4 border border-gray-300">
-                      {index + 1}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.user ? s.user.username : "User Name Not Available"}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.field_id
-                        ? s.field_id.fieldName
-                        : "Field Name Not Available"}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.tanggalPesan}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.lamaSewa} jam
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.waktuMulai}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      {s.waktuBerakhir}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300">
-                      Rp {s.total}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-300 flex space-x-2">
-                      <button className="bg-blue-500 text-white px-3 py-2 rounded">
-                        Status
-                      </button>
-                      <button
-                        onClick={() => handleDelete(s.id)}
-                        className="bg-red-500 text-white px-3 py-2 rounded"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {sewa
+                  .filter((s) => s.user_id !== undefined && s.user_id !== null)
+                  .map((s, index) => (
+                    <tr key={s.id} className="border-b border-gray-300">
+                      <td className="py-2 px-4 border border-gray-300">
+                        {index + 1}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300 text-center">
+                        {s.user_id
+                          ? s.user_id.username
+                          : "User Name Not Available"}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        {s.field_id
+                          ? s.field_id.fieldName
+                          : "Field Name Not Available"}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        {s.tanggalPesan}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        {s.lamaSewa} jam
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        {s.waktuMulai}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        {s.waktuBerakhir}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300">
+                        Rp {s.total}
+                      </td>
+                      <td className="py-2 px-4 border border-gray-300 flex space-x-2">
+                        <button
+                          onClick={() => handleDelete(s.id)}
+                          className="bg-red-500 text-white px-3 py-2 rounded"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

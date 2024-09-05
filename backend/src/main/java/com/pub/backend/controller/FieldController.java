@@ -17,6 +17,8 @@ import com.pub.backend.model.Field;
 import com.pub.backend.repository.FieldRepository;
 
 
+
+
 @CrossOrigin(origins ="http://localhost:5173")
 @RequestMapping("/api/fields")
 @RestController
@@ -26,7 +28,7 @@ public class FieldController {
     FieldRepository repository;
 
     // Get all fields
-    @GetMapping
+    @GetMapping("/get")
     public List<Field> getAll() {
         return repository.findAll();
     }

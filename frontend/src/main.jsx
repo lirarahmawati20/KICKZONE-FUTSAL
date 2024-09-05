@@ -19,7 +19,8 @@ import DataMember from './components/admin/DataMember.jsx';
 import DataAdmin from './components/admin/DataAdmin.jsx';
 import Pembayaran from './components/user/Pembayaran.jsx';
 import Jadwal from './components/user/Jadwal.jsx';
-
+import SalesChart from './components/admin/SalesChart.jsx';
+import DataPembayaran from './components/admin/DataPembayaran.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +85,8 @@ const router = createBrowserRouter([
       { path: "/admin/dataMember", element: <DataMember /> },
       { path: "/admin/dataAdmin", element: <DataAdmin /> },
       { path: "/user/jadwal", element: <Jadwal /> },
+      { path: "/admin/salesChart", element: <SalesChart /> },
+      { path: "/admin/dataPembayaran", element: <DataPembayaran /> },
     ],
   },
 ]);

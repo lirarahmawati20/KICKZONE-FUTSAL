@@ -13,7 +13,7 @@ import lombok.Setter;
 public class SewaDto {
       
     private Long id;
-    private User  user_id ;
+    private Long user_id ;
     private Field field_id;
     private String tanggalPesan;
     private Integer lamaSewa;

@@ -3,7 +3,7 @@ package com.pub.backend.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.pub.backend.service.UserService;
+// import com.pub.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -138,7 +138,7 @@ public class AuthController {
     }
     @PostMapping("/sign-in")
     public ResponseEntity<Map<String, String>> signIn(@RequestBody Map<String, String> userMap,
-            HttpServletResponse response) throws JOSEException {
+        HttpServletResponse response) throws JOSEException {
         String email = userMap.get("email");
         String password = userMap.get("password");
         

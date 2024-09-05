@@ -58,15 +58,17 @@ const Sidebar = ({ isVisible }) => {
             </Link>
           </li>
 
-          {/* <li>
-            <Link to="/historyMember" className="text-white hover:text-red-500">
+          <li>
+            <Link
+              to="/admin/dataPembayaran"
+              className="text-white hover:text-red-500"
+            >
               <div className="flex gap-3">
-                {" "}
                 <Clock />
-                History Member
+                data pembayaran
               </div>
             </Link>
-          </li> */}
+          </li>
 
           <li>
             <Link
@@ -83,7 +85,7 @@ const Sidebar = ({ isVisible }) => {
           <li>
             <Link to="/login" className="text-white hover:text-red-500">
               <div className="flex gap-3">
-                <LogOut /> LogOut
+                <LogOut onClick={() => localStorage.removeItem('token')}/> LogOut
               </div>
             </Link>
           </li>

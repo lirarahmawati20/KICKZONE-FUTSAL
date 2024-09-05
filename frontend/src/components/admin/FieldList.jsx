@@ -1,7 +1,7 @@
 import { TicketPlus } from "lucide-react";
 import { useEffect, useState } from "react";
-import HeaderAdmin from "./HeaderAdmin";
 import Sidebar from "./Sidebar";
+import HeaderAdmin from "./HeaderAdmin";
 
 const FieldList = () => {
   const [fields, setFields] = useState([]);
@@ -15,22 +15,6 @@ const FieldList = () => {
     description: "",
     price: "",
   });
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/fields")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setFields(data);
-      })
-      .catch((error) => {
-        console.error("Terjadi kesalahan saat mengambil data:", error);
-      });
-  }, []);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:8080/api/fields/${id}`, {
@@ -80,7 +64,6 @@ const FieldList = () => {
       body: JSON.stringify(currentField),
     })
       .then(() => {
-        window.location.reload();
         setShowModal(false);
       })
       .then((data) => {
@@ -101,7 +84,22 @@ const FieldList = () => {
     setShowMenu(!showMenu);
   };
 
-  console.log(fields);
+  // console.log(fields);
+
+  useEffect(() => {
+    const fetchFields = async () => {
+      // const token = localStorage.getItem('token');
+      const response = await fetch("http://localhost:8080/api/fields/get", {
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      });
+      const res = await response.json();
+      setFields(res);
+    };
+    fetchFields();
+  });
   return (
     <div className="flex flex-col lg:flex-row min-h-screen font-serif">
       <Sidebar isVisible={showMenu} />

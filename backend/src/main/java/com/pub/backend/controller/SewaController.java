@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pub.backend.dto.SewaDto;
 import com.pub.backend.model.Field;
 import com.pub.backend.model.Sewa;
+import com.pub.backend.model.User;
 import com.pub.backend.repository.FieldRepository;
 import com.pub.backend.repository.SewaRepository;
 
@@ -52,12 +53,13 @@ public class SewaController {
 
     @PostMapping
     public String create(@RequestBody SewaDto sewaDto) {
+        System.out.println(sewaDto.getUser_id());
          Field field = repositoryField.findById(sewaDto.getField_id().getId()).orElse(null);
         if (field != null) {
         Sewa sewa= new Sewa();
         sewa.setField_id(sewaDto.getField_id());
         sewa.setLamaSewa(sewaDto.getLamaSewa());
-        sewa.setUser_id(sewaDto.getUser_id());
+        sewa.setUser_id(new User(sewaDto.getUser_id()));
         sewa.setWaktuBerakhir(sewaDto.getWaktuBerakhir());
         sewa.setWaktuMulai(sewaDto.getWaktuMulai());
         sewa.setTotal(field.getPrice()*sewaDto.getLamaSewa());

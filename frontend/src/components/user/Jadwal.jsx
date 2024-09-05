@@ -48,8 +48,8 @@ export default function Jadwal(){
                     <tr key={s.id} className="border-b border-gray-200">
                       <td className="py-2 px-4">{index + 1}</td>
                       <td className="py-2 px-4">
-                        {s.user_tbl
-                          ? s.user_tbl.name
+                        {s.user_id
+                          ? s.user_id.username
                           : "user Name Not Available"}
                       </td>
                       <td className="py-2 px-4">

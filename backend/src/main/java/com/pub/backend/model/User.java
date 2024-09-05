@@ -94,5 +94,14 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of((GrantedAuthority) () -> role);
     }
+
+    public User(Long id){
+
+        this.id=id;
+    }
+    
+    public User(){
+
+    }
 }
 

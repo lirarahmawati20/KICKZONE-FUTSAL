@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       {/* Header Section */}
-      <header className="bg-gray-800 text-white  px-4 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50 ">
+      <header className="bg-black text-white  px-2 md:px-8 lg:px-12 flex justify-between items-center sticky top-0 z-50 ">
         <div
           id="home"
           className="flex items-center text-3xl font-bold font-serif"
@@ -20,7 +20,7 @@ export default function Home() {
           <img
             src="/image/th-removebg-preview.png"
             alt="Kickzone Logo"
-            className="h-24 w-24 mr-2"
+            className="h-24 w-24 "
           />
           <a href="#">KICKZONE FUTSAL</a>
         </div>
@@ -85,7 +85,7 @@ export default function Home() {
         }}
       >
         <div className="text-left ml-6 md:ml-12 lg:ml-24 italic font-serif">
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-black shadow-lg">
             Sehatkan Dirimu
             <p>Dengan Berolahraga</p>
             <p>di Kickzone Futsal</p>
@@ -93,7 +93,7 @@ export default function Home() {
           <div className="flex justify-start space-x-4 mt-6">
             <Link
               to="/login"
-              className="bg-amber-500 text-white py-2 px-10 rounded hover:bg-amber-300"
+              className="bg-amber-700 text-white py-2 px-10 rounded hover:bg-amber-300"
             >
               Login
             </Link>
@@ -112,7 +112,7 @@ export default function Home() {
       <section id="about" className="py-20 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center">
           <div className="flex-1 mb-9 md:mb-0 relative">
-            <div className="relative">
+            <div className="relative mb-20">
               <img
                 src="/image/pngtree-sport-football-background-picture-image_2446912.jpg"
                 alt="Lapangan Futsal"
@@ -132,7 +132,7 @@ export default function Home() {
           </div>
           <div className="flex-1 md:ml-8 font-serif">
             <h2 className="text-3xl font-bold mb-9">Tentang Kami</h2>
-            <p className="text-lg mb-9">
+            <p className="text-lg mb-20">
               Kickzone Futsal adalah pusat olahraga yang didedikasikan untuk
               meningkatkan kesehatan dan kebugaran masyarakat melalui futsal.
               Kami menyediakan fasilitas futsal modern yang nyaman, serta

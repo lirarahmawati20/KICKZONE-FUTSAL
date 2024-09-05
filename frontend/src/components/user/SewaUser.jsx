@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function SewaUser() {
-  const { fieldId } = useParams(); // Mengambil ID field dari URL
+  const { fieldId } = useParams();
   const [field, setField] = useState(null);
+  const [dataSewa, setDataSewa] = useState()
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/fields/${fieldId}`)
@@ -12,16 +13,14 @@ export default function SewaUser() {
       .catch((error) => console.error("Error fetching field data:", error));
   }, [fieldId]);
 
-  // if (!field) {
-  //   return <div>Loading...</div>;
-  // }
+ 
 
   fetch("http://localhost:8080/api/sewa", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(dataToSend),
+    body: JSON.stringify(dataSewa),
   })
     .then((response) => {
       if (!response.ok) {
