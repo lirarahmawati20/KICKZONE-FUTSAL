@@ -115,13 +115,17 @@ const Pembayaran = () => {
                     <button
                       onClick={() => handleBayarClick(s)}
                       className={`${
-                        s.status == "paid" ? "bg-green-500" : "bg-blue-500"
+                        s.bokingStatus == "paid"
+                          ? "bg-green-500"
+                          : "bg-blue-500"
                       } text-white px-4 py-2 rounded mr-2 hover:${
-                        s.status == "paid" ? "bg-green-600" : "bg-blue-600"
+                        s.bokingStatus == "paid"
+                          ? "bg-green-600"
+                          : "bg-blue-600"
                       }`}
-                      disabled={s.status == "paid"}
+                      disabled={s.bokingStatus == "paid"}
                     >
-                      {s.status == "paid" ? "selesai" : "Bayar"}
+                      {s.bokingStatus == "paid" ? "selesai" : "Bayar"}
                     </button>
                     <button
                       onClick={() => handleDelete(s.id)}

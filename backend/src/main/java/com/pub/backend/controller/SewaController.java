@@ -57,14 +57,14 @@ public class SewaController {
          Field field = repositoryField.findById(sewaDto.getField_id().getId()).orElse(null);
         if (field != null) {
         Sewa sewa= new Sewa();
-        sewa.setField_id(sewaDto.getField_id());
+        sewa.setField_id(field);
         sewa.setLamaSewa(sewaDto.getLamaSewa());
         sewa.setUser_id(new User(sewaDto.getUser_id()));
         sewa.setWaktuBerakhir(sewaDto.getWaktuBerakhir());
         sewa.setWaktuMulai(sewaDto.getWaktuMulai());
         sewa.setTotal(field.getPrice()*sewaDto.getLamaSewa());
         sewa.setHarga(field.getPrice());
-        sewa.setStatus("pending");
+        sewa.setBokingStatus("pending");
         sewa.setTanggalPesan(convertToLocalDateTime(sewaDto.getTanggalPesan()));
         repository.save(sewa);
         return "sewa successfully added";

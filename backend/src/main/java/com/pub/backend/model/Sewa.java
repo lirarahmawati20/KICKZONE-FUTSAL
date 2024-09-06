@@ -34,5 +34,5 @@ public class Sewa {
     private LocalTime waktuBerakhir;
     private Double harga;
     private Double total;
-    private String status;
+    private String bokingStatus;
 }

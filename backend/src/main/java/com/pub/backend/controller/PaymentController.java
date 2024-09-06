@@ -48,8 +48,8 @@ public class PaymentController {
     public ResponseEntity<String> create(@RequestBody PaymentDto payment) {
         Sewa sewa = sewaRepository.findById(payment.getIdSewa()).orElse(null);
         if (sewa!=null){
-            if(!sewa.getStatus().equalsIgnoreCase("paid")){
-            sewa.setStatus("paid");
+            if(!sewa.getBokingStatus().equalsIgnoreCase("paid")){
+            sewa.setBokingStatus("paid");
             sewaRepository.save(sewa);
             Payment savePayment=new Payment();
             savePayment.setId_sewa(sewa);
