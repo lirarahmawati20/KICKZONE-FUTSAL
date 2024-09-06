@@ -76,22 +76,22 @@ export default function HeaderUser() {
                 </li>
                 <li>
                   <Link
-                    to="/user/payment"
+                    to="/user/pembayaran"
                     className="hover:underline"
                     onClick={toggleMenu}
                   >
                     Pembayaran
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
-                    to="/wanita"
+                    to="/jadwal"
                     className="hover:underline"
                     onClick={toggleMenu}
                   >
                     Jadwal
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <button className="hover:underline" onClick={handleLogout}>
                     logout

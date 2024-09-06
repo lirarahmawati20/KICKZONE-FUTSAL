@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -50,11 +51,14 @@ const Login = () => {
       setErrMsg(`Terjadi kesalahan pada server!,${error}`);
     }
   };
+
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2 flex items-center justify-center bg-white">
-        <div className="w-full max-w-sm p-8">
-          <h2 className="text-6xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex flex-col lg:flex-row h-screen">
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-white p-4 sm:p-8">
+        <div className="w-full max-w-sm">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-center">
+            Login
+          </h2>
           <p className="text-center text-gray-600 mb-6">
             Log in with your data
           </p>
@@ -109,8 +113,12 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 bg-gray-800 flex items-center justify-center">
-        <img src="/image/football_player_PNG78.png" alt="" />
+      <div className="w-full lg:w-1/2 bg-gray-800 flex items-center justify-center p-4">
+        <img
+          src="/image/football_player_PNG78.png"
+          alt="Football Player"
+          className="w-full h-auto max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+        />
       </div>
     </div>
   );

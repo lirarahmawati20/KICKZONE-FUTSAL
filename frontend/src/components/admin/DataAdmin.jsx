@@ -63,18 +63,21 @@ const DataAdmin = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setIsModalOpen(false);
-        // Update the user list
-        if (isEditing) {
-          setUsers((prevUsers) =>
-            prevUsers.map((user) => (user.id === data.id ? data : user))
-          );
-        } else {
-          setUsers((prevUsers) => [...prevUsers, data]);
-        }
+      .then(() => {
+        //  console.log.info(response);
+        window.location.reload();
       })
+      // .then((data) => {
+      //   setIsModalOpen(false);
+      //   // Update the user list
+      //   if (isEditing) {
+      //     setUsers((prevUsers) =>
+      //       prevUsers.map((user) => (user.id === data.id ? data : user))
+      //     );
+      //   } else {
+      //     setUsers((prevUsers) => [...prevUsers, data]);
+      //   }
+      // })
       .catch((error) => {
         console.error("Terjadi kesalahan saat menyimpan data:", error);
       });
