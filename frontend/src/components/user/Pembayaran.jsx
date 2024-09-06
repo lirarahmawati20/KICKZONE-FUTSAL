@@ -49,6 +49,7 @@ const Pembayaran = () => {
     setIsModalOpen(false);
     setSelectedPayment(null);
     setIsPaymentCompleted(false); // Reset status pembayaran selesai
+    window.location.reload();
   };
 
   const handleSavePayment = (data) => {
@@ -66,12 +67,13 @@ const Pembayaran = () => {
       },
       body: JSON.stringify(newPayment),
     })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        setIsPaymentCompleted(true);
+      })
       .catch((error) => {
         console.error("Terjadi kesalahan saat menghapus data:", error);
       });
-
-    setIsPaymentCompleted(true); // Set status pembayaran selesai
   };
 
   return (
