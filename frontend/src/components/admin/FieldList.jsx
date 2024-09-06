@@ -2,6 +2,8 @@ import { TicketPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
+import { Trash2 } from "lucide-react";
+import { SquarePen } from "lucide-react";
 
 const FieldList = () => {
   const [fields, setFields] = useState([]);
@@ -148,18 +150,19 @@ const FieldList = () => {
                     <td className="py-2 px-4">{field?.fieldName}</td>
                     <td className="py-2 px-4">{field?.description}</td>
                     <td className="py-2 px-4">${field?.price}</td>
-                    <td className="py-2 px-4">
+                    <td className="py-2 px-4 flex">
+                     
                       <button
                         onClick={() => handleEdit(field)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2 "
                       >
-                        Edit
+                        <SquarePen />
                       </button>
                       <button
                         onClick={() => handleDelete(field?.id)}
                         className="bg-red-500 text-white px-4 py-2 rounded"
                       >
-                        Delete
+                        <Trash2 />
                       </button>
                     </td>
                   </tr>

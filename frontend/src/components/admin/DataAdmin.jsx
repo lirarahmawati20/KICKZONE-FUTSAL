@@ -2,6 +2,7 @@ import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
 import { useEffect, useState } from "react";
 import { TicketPlus } from "lucide-react";
+import { SquarePen } from "lucide-react";
 
 const DataAdmin = () => {
   const [me, setUsers] = useState([]);
@@ -156,10 +157,10 @@ const DataAdmin = () => {
                       </td>
                       <td className="py-2 px-4 text-gray-700 border border-gray-300">
                         <button
-                          className="text-blue-500 hover:text-blue-700"
+                          className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
                           onClick={() => handleEditClick(user)}
                         >
-                          Edit
+                          <SquarePen />
                         </button>
                       </td>
                     </tr>

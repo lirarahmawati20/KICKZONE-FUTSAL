@@ -36,17 +36,18 @@ const DataPembayaran = () => {
     setShowMenu(!showMenu);
   };
 
+  const fetchData = async () => {
+    await fetch("http://localhost:8080/api/payment")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setPayments(data);
+      })
+      .catch((error) => setError(error));
+  };
   // Fetch data pembayaran dari backend
   useEffect(() => {
-    fetch("http://localhost:8080/api/payment")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Gagal mengambil data pembayaran");
-        }
-        return response.json();
-      })
-      .then((data) => setPayments(data))
-      .catch((error) => setError(error));
+    fetchData();
   }, []);
   return (
     <div className="flex flex-col lg:flex-row min-h-screen font-serif">
@@ -65,13 +66,12 @@ const DataPembayaran = () => {
               <p className="text-red-500">Terjadi kesalahan: {error.message}</p>
             )}
 
-            <table className="table-auto w-full border-collapse bg-slate-800 text-white">
+            <table className="table-auto w-full border-collapse bg-slate-600 text-white">
               <thead>
                 <tr>
                   <th className="border px-4 py-2">No</th>
                   <th className="border px-4 py-2">Nama Sewa</th>
                   <th className="border px-4 py-2">Bukti</th>
-                  <th className="border px-4 py-2">Tanggal Upload</th>
                   <th className="border px-4 py-2">Konfirmasi</th>
                   <th className="border px-4 py-2">Aksi</th>
                 </tr>
@@ -82,9 +82,6 @@ const DataPembayaran = () => {
                     <td className="border px-4 py-2">{index + 1}</td>
                     <td className="border px-4 py-2">{payment.id_sewa.id}</td>
                     <td className="border px-4 py-2">{payment.bukti}</td>
-                    <td className="border px-4 py-2">
-                      {payment.tanggal_uplode}
-                    </td>
                     <td className="border px-4 py-2">{payment.konfirmasi}</td>
                     <td className="border px-4 py-2">
                       {payment.konfirmasi === "belum" ? (

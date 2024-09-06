@@ -1,4 +1,4 @@
-import { TicketPlus } from "lucide-react";
+// import { TicketPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import HeaderUser from "./HeaderUser";
 
@@ -7,7 +7,6 @@ const Pembayaran = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
-  const [paymentStatus, setPaymentStatus] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:8080/api/sewa")
@@ -52,15 +51,27 @@ const Pembayaran = () => {
     setIsPaymentCompleted(false); // Reset status pembayaran selesai
   };
 
-  const handleSavePayment = () => {
-
-    setPaymentStatus((prevStatus) => ({
-      ...prevStatus,
-      [selectedPayment.id]: "Selesai",
-    }));
+  const handleSavePayment = (data) => {
+    const newPayment = {
+      idSewa: data.id,
+      bukti: "terlampir",
+      konfirmasi: "Telah Dibayaran",
+    };
+    console.log(newPayment);
+    // return;
+    fetch(`http://localhost:8080/api/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPayment),
+    })
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.error("Terjadi kesalahan saat menghapus data:", error);
+      });
 
     setIsPaymentCompleted(true); // Set status pembayaran selesai
-   
   };
 
   return (
@@ -102,17 +113,13 @@ const Pembayaran = () => {
                     <button
                       onClick={() => handleBayarClick(s)}
                       className={`${
-                        paymentStatus[s.id] === "Selesai"
-                          ? "bg-green-500"
-                          : "bg-blue-500"
+                        s.status == "paid" ? "bg-green-500" : "bg-blue-500"
                       } text-white px-4 py-2 rounded mr-2 hover:${
-                        paymentStatus[s.id] === "Selesai"
-                          ? "bg-green-600"
-                          : "bg-blue-600"
+                        s.status == "paid" ? "bg-green-600" : "bg-blue-600"
                       }`}
-                      disabled={paymentStatus[s.id] === "Selesai"}
+                      disabled={s.status == "paid"}
                     >
-                      {paymentStatus[s.id] === "Selesai" ? "Selesai" : "Bayar"}
+                      {s.status == "paid" ? "selesai" : "Bayar"}
                     </button>
                     <button
                       onClick={() => handleDelete(s.id)}
@@ -139,7 +146,6 @@ const Pembayaran = () => {
             </p>
             <p>Harga: Rp {selectedPayment.harga}</p>
             <p>Total: Rp {selectedPayment.total}</p>
-            
 
             <div className="mt-4 flex gap-4">
               <div className="flex-1">
@@ -150,7 +156,9 @@ const Pembayaran = () => {
                 />
               </div>
             </div>
-            <p className="border-spacing-4 border-4 justify-center mt-3 p-2 text-center">Setatus belum bayar </p>
+            <p className="border-spacing-4 border-4 justify-center mt-3 p-2 text-center">
+              Setatus belum bayar{" "}
+            </p>
 
             <div className="mt-6 flex justify-between">
               <button
@@ -161,7 +169,7 @@ const Pembayaran = () => {
               </button>
               <button
                 className="bg-green-500 px-4 py-2 text-white rounded hover:bg-green-600"
-                onClick={handleSavePayment}
+                onClick={() => handleSavePayment(selectedPayment)}
               >
                 Simpan
               </button>
@@ -191,4 +199,3 @@ const Pembayaran = () => {
 };
 
 export default Pembayaran;
-

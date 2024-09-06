@@ -1,70 +1,3 @@
-// import java.util.List;
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.web.bind.annotation.DeleteMapping;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
-
-// import com.pub.backend.model.Payment;
-// import com.pub.backend.model.Sewa;
-// import com.pub.backend.repository.PaymentRepository;
-
-
-
-
-// @CrossOrigin(origins ="http://localhost:5173")
-// @RequestMapping("/api/payment")
-// @RestController
-// public class PaymentController {
-
-//     @Autowired
-//    PaymentRepository repository;
-
-   
-//     @GetMapping
-//     public List<Payment> getAll() {
-//         return repository.findAll();
-//     }
-
-
-   
-//     @GetMapping("/{id}")
-//     public Object getById(@PathVariable Long id) {
-//         Payment payment = repository.findById(id).orElse(null);
-//         if (payment != null) {
-//             return payment;
-//         } else {
-//             return "Payment with ID " + id + " not found";
-//         }
-//     }
-
-   
-//     @PostMapping
-//     public String create(@RequestBody Payment payment) {
-//         repository.save(payment);
-//         return "payment successfully added";
-//     }
-
-//      @PutMapping("/{id}")
-//     public String update(@PathVariable Long id,@RequestBody  Payment payment) {
-//         payment.setId(id);
-//         repository.save(payment);
-//         return " Payment successfully updated";
-//     }
-    
-//     @DeleteMapping("/{id}")
-//     public String deleteById(@PathVariable Long id) {
-//         repository.deleteById(id);
-//         return "Payment successfully deleted";
-//     }
-// }
-
 package com.pub.backend.controller;
 
 import java.util.List;
@@ -75,16 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.pub.backend.dto.PaymentDto;
 import com.pub.backend.model.Payment;
+import com.pub.backend.model.Sewa;
 import com.pub.backend.repository.PaymentRepository;
+import com.pub.backend.repository.SewaRepository;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials="true")
 @RequestMapping("/api/payment")
 @RestController
 public class PaymentController {
 
     @Autowired
     private PaymentRepository repository;
+
+    @Autowired
+    private SewaRepository sewaRepository;
 
     // Get all payments
     @GetMapping
@@ -106,16 +45,37 @@ public class PaymentController {
 
     // Create new payment
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody Payment payment) {
-        repository.save(payment);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Payment successfully added");
+    public ResponseEntity<String> create(@RequestBody PaymentDto payment) {
+        Sewa sewa = sewaRepository.findById(payment.getIdSewa()).orElse(null);
+        if (sewa!=null){
+            if(sewa.getStatus().equalsIgnoreCase("paid")){
+            sewa.setStatus("paid");
+            sewaRepository.save(sewa);
+            Payment savePayment=new Payment();
+            savePayment.setSewa(sewa);
+             savePayment.setBukti(payment.getBukti());
+             savePayment.setKonfirmasi(payment.getKonfirmasi());
+
+            repository.save(sevePayment);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Payment successfully added");
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Sewa with ID " + payment.getIdSewa()+ " sudah di bayar");
+            }
+           
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sewa with ID " + payment.getIdSewa()+ " not found" );
+        }
     }
 
     // Update payment
     @PutMapping("/{id}")
+
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Payment paymentDetails) {
         Optional<Payment> existingPayment = repository.findById(id);
         if (existingPayment.isPresent()) {
+            // Sewa sewa=sewarePository.findById(paymentDetails.)
             Payment paymentToUpdate = existingPayment.get();
             paymentToUpdate.setBukti(paymentDetails.getBukti());
             // paymentToUpdate.setTanggal_uplode(paymentDetails.getTanggal_uplode());

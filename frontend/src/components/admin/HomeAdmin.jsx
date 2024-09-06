@@ -1,8 +1,7 @@
-// src/pages/HomeAdmin.jsx
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
-import { HandCoins, Handshake, HeartPulse, Laugh, TicketPlus } from "lucide-react";
+import { HandCoins, Handshake, HeartPulse, Laugh} from "lucide-react";
 import SalesChart from "./SalesChart";
 const HomeAdmin = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -32,7 +31,7 @@ const HomeAdmin = () => {
               <div className="text-center bg-slate-800 text-white p-6 rounded-tl-3xl rounded-br-3xl shadow-lg transition-transform hover:scale-105">
                 <Handshake size={30} className="mx-auto mb-4" />
                 <p className="font-semibold text-xl">Data PEMESAN</p>
-                <p>0</p>
+                <p>Mengutamakan kenyamanan penyewa</p>
               </div>
 
               <div className="text-center bg-teal-300 text-white p-6 rounded-tl-3xl rounded-br-3xl shadow-lg transition-transform hover:scale-105">

@@ -1,4 +1,5 @@
 // src/components/Sidebar.jsx
+import { HandCoins } from "lucide-react";
 import { CircleUserRound, ClipboardList, ClipboardPenLine, Clock, House, LogOut, SmilePlus } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -64,7 +65,7 @@ const Sidebar = ({ isVisible }) => {
               className="text-white hover:text-red-500"
             >
               <div className="flex gap-3">
-                <Clock />
+                <HandCoins />
                 data pembayaran
               </div>
             </Link>
@@ -85,7 +86,8 @@ const Sidebar = ({ isVisible }) => {
           <li>
             <Link to="/login" className="text-white hover:text-red-500">
               <div className="flex gap-3">
-                <LogOut onClick={() => localStorage.removeItem('token')}/> LogOut
+                <LogOut onClick={() => localStorage.removeItem("token")} />{" "}
+                LogOut
               </div>
             </Link>
           </li>

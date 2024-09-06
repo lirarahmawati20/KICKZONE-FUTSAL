@@ -21,5 +21,6 @@ public class SewaDto {
     private LocalTime waktuBerakhir;
     private Double harga;
     private Double total;
+    private String status;
 
 }

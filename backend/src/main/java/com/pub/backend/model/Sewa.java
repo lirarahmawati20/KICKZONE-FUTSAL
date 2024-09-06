@@ -28,29 +28,11 @@ public class Sewa {
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
     private Field field_id;
-
     private LocalDateTime tanggalPesan;
-
     private Integer lamaSewa;
-
     private LocalTime waktuMulai;
     private LocalTime waktuBerakhir;
     private Double harga;
     private Double total;
+    private String status;
 }
-
-
-// {
-//   "user": {
-//     "id": 1
-//   },
-//   "field_id": {
-//     "id": 7
-//   },
-//   "tanggalPesan": "2024-08-31T10:00:00",
-//   "lamaSewa": 4,
-//   "waktuMulai": "10:00",
-//   "waktuBerakhir": "14:00",
-//   "harga": 20000,
-//   "total": 80000
-// }

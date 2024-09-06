@@ -1,0 +1,35 @@
+------ example for post data field ------
+
+    "fieldName": "Lapangan Arena Futsal",
+    "description": "Lapangan futsal dengan permukaan berkualitas tinggi dan fasilitas modern untuk pertandingan yang intens.",
+    "price": 150000,
+    "photoUrl":https://i0.wp.com/www.rukita.co/stories/wp-content/uploads/2023/03/Five-Soccer-Club-Serenia-Mansion-3-done.jpg?fit=1360%2C907&ssl=1
+
+ 
+    "fieldName": "Lapangan Galaxy Futsal",
+    "description": "Lapangan futsal dengan desain futuristik dan pencahayaan LED yang memukau.",
+    "price": 180000,
+    "photoUrl":https://i0.wp.com/www.rukita.co/stories/wp-content/uploads/2023/03/Five-Soccer-Club-Serenia-Mansion-3-done.jpg?fit=1360%2C907&ssl=1
+
+  
+    "fieldName": "Lapangan Titan Futsal",
+    "description":"Lapangan futsal dengan standar internasional, ideal untuk pertandingan dan latihan profesional.",
+    "price": 200000,
+    "photoUrl":https://media-cdn.yummyadvisor.com/store/8b83193d-ea71-4527-97f0-0791f1cb134e.jpg
+"
+ 
+    "fieldName": "Lapangan Zenith Futsal",
+    "description": "Lapangan futsal dengan permukaan lapangan yang halus dan fasilitas pelatihan yang lengkap.",
+    "price": 170000,
+    "photoUrl":https://www.heydayat.com/wp-content/uploads/2022/12/Heydayat.com-Suasana-Pagi-Lapangan-Kodam-Brawijaya-Stadium-Surabaya.jpg
+"
+ 
+    "fieldName": "Lapangan Quantum Futsal",
+    "description": "Lapangan futsal yang menawarkan pengalaman bermain yang dinamis dengan peralatan canggih.",
+    "price": 160000,
+    "photoUrl":https://4.bp.blogspot.com/-Bp7iVfw_xjU/VwTDBBLrjUI/AAAAAAAAGJM/-yGNdPzlWUskmk0y4eGKapuKvFdhL08FA/s1600/Jasa-Pembuatan-Lapangan-Futsal.jpg
+"
+
+
+
+

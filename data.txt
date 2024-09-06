@@ -1,9 +1,0 @@
-data lapangan
-
-des :Lapangan permainan strategis dan kualitas penggawang
-     fasilitas premium dan fasilitas premium dan atmosfer yang mendukun
-     Lapangan futsal modern untuk bermain  dan berkualitas tinggi."
-
-foto :https://tse1.mm.bing.net/th?id=OIP.SBtiA6WvbFJEiBN0In2LtQHaE8&pid=Api&P=0&h=220
-      https://4.bp.blogspot.com/-Bp7iVfw_xjU/VwTDBBLrjUI/AAAAAAAAGJM/-yGNdPzlWUskmk0y4eGKapuKvFdhL08FA/s1600/Jasa-Pembuatan-Lapangan-Futsal.jpg
-

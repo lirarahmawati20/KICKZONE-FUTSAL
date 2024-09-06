@@ -78,13 +78,10 @@ public class User implements UserDetails {
 
     @Column(unique = true)
     private String email;
-
     private String password;
-
     private String username;
     private String jenisKelamin;
     private String noHp;
-
     private String role;
 
     public String setEmailEmail() {

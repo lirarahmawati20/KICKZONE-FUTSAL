@@ -64,6 +64,7 @@ public class SewaController {
         sewa.setWaktuMulai(sewaDto.getWaktuMulai());
         sewa.setTotal(field.getPrice()*sewaDto.getLamaSewa());
         sewa.setHarga(field.getPrice());
+        sewa.setStatus("pending");
         sewa.setTanggalPesan(convertToLocalDateTime(sewaDto.getTanggalPesan()));
         repository.save(sewa);
         return "sewa successfully added";
@@ -92,16 +93,3 @@ public class SewaController {
         LocalDate date = LocalDate.parse(dateStr, formatter);
         return date.atStartOfDay();}
 }
-
-// http://localhost:8080/api/sewa
-// {
-//   "field_id": {
-//     "id": 7
-//   },
-//   "tanggalPesan": "2024-08-20T00:00:00",
-//   "lamaSewa": 4,
-//   "waktuMulai": "10:00",
-//   "waktuBerakhir": "12:00",
-//   "harga": 20000,
-//   "total": 40000
-// }

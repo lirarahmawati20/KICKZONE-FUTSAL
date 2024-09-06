@@ -24,7 +24,6 @@ export default function HomeUser() {
   const [sortType, setSortType] = useState("default"); // State for sorting
   const [searchQuery, setSearchQuery] = useState(""); // State for search
 
-  // Fetching data from the backend API
   useEffect(() => {
     fetch("http://localhost:8080/api/fields/get ")
       .then((response) => response.json())
@@ -32,7 +31,7 @@ export default function HomeUser() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  // Open modal for booking a field
+  // Open modal for booking 
   const openModal = (field) => {
     setSelectedField(field);
     setIsModalOpen(true);
@@ -48,7 +47,7 @@ export default function HomeUser() {
     setWaktuBerakhir("");
   };
 
-  // Sorting and filtering fields
+  // Sorting 
   const sortedAndFilteredFields = fields
     .filter((field) =>
       field.fieldName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -66,7 +65,7 @@ export default function HomeUser() {
       return 0;
     });
 
-  // Handle booking form submission
+
   const handleBooking = () => {
     const userId = jwtDecode(localStorage.getItem("token"));
     const bookingData = {
@@ -80,7 +79,7 @@ export default function HomeUser() {
     };
 
 
-    console.log("Booking Data:", bookingData); // Debugging
+    console.log("Booking Data:", bookingData); 
     fetch("http://localhost:8080/api/sewa", {
       method: "POST",
       headers: {
@@ -90,8 +89,8 @@ export default function HomeUser() {
     })
       .then(() => {
         alert("Pemesanan berhasil!");
-        closeModal(); // Close modal after successful booking
-        window.location.reload(); // Reload page to refresh data
+        closeModal(); 
+        window.location.reload(); 
       })
       .catch((error) => {
         console.error("Error saving data:", error);
@@ -355,306 +354,3 @@ export default function HomeUser() {
     </>
   );
 }
-
-// import { Link } from "react-router-dom";
-// import {
-//   Facebook,
-//   HandCoins,
-//   Handshake,
-//   HeartPulse,
-//   Instagram,
-//   Laugh,
-//   Twitter,
-// } from "lucide-react";
-// import HeaderUser from "./HeaderUser";
-// import CarouselUser from "./CarouselUsel";
-// import { useEffect, useState } from "react";
-
-// export default function HomeUser() {
-//   const [fields, setFields] = useState([]);
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [selectedField, setSelectedField] = useState(null);
-//   const [tanggalPesan, setTanggalMain] = useState("");
-//   const [lamaSewa, setDurasiMain] = useState("");
-//   const [waktuMulai, setWaktuMulai] = useState("");
-//   const [waktuBerakhir, setWaktuBerakhir] = useState("");
-//   const [sortType, setSortType] = useState("default"); // State for sorting
-//   const [searchQuery, setSearchQuery] = useState(""); // State for search
-
-//   // Fetching data from the backend API
-//   useEffect(() => {
-//     fetch("http://localhost:8080/api/fields")
-//       .then((response) => response.json())
-//       .then((data) => setFields(data))
-//       .catch((error) => console.error("Error fetching data:", error));
-//   }, []);
-
-//   // Sorting and filtering fields
-//   const sortedAndFilteredFields = fields
-//     .filter((field) =>
-//       field.fieldName.toLowerCase().includes(searchQuery.toLowerCase())
-//     )
-//     .sort((a, b) => {
-//       if (sortType === "priceAsc") {
-//         return a.price - b.price;
-//       } else if (sortType === "priceDesc") {
-//         return b.price - a.price;
-//       } else if (sortType === "nameAsc") {
-//         return a.fieldName.localeCompare(b.fieldName);
-//       } else if (sortType === "nameDesc") {
-//         return b.fieldName.localeCompare(a.fieldName);
-//       }
-//       return 0;
-//     });
-
-//   // Open modal for booking a field
-//   const openModal = (field) => {
-//     setSelectedField(field);
-//     setIsModalOpen(true);
-//   };
-
-//   // Close booking modal
-//   const closeModal = () => {
-//     setIsModalOpen(false);
-//     setSelectedField(null);
-//     setTanggalMain("");
-//     setDurasiMain("");
-//     setWaktuMulai("");
-//     setWaktuBerakhir("");
-//   };
-
-//   // Handle booking form submission
-//   const handleBooking = () => {
-//     const bookingData = {
-//       id: null,
-//       field_id: { id: selectedField.id },
-//       user: { id: 17 },
-//       tanggalPesan: tanggalPesan,
-//       lamaSewa: lamaSewa,
-//       waktuMulai: waktuMulai,
-//       waktuBerakhir: waktuBerakhir,
-//     };
-
-//     console.log("Booking Data:", bookingData); // Debugging
-
-//     fetch("http://localhost:8080/api/sewa", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(bookingData),
-//     })
-//       .then(() => {
-//         alert("Pemesanan berhasil!");
-//         closeModal(); // Close modal after successful booking
-//         window.location.reload(); // Reload page to refresh data
-//       })
-//       .catch((error) => {
-//         console.error("Error saving data:", error);
-//         alert("Pemesanan gagal. Silakan coba lagi.");
-//       });
-//   };
-
-//   return (
-//     <>
-//       <HeaderUser />
-//       <CarouselUser />
-
-//       <div className="px-6 py-8 bg-slate-100">
-//         <div className="flex flex-wrap justify-around mb-6 gap-6">
-//           <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
-//             <Handshake size={30} className="text-white mx-auto mb-2" />
-//             <p className="font-semibold">KENYAMANAN</p>
-//             <p>Mengutamakan kenyamanan penyewa</p>
-//           </div>
-
-//           <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
-//             <Laugh size={30} className="text-white mx-auto mb-2" />
-//             <p className="font-semibold">STRATEGIS</p>
-//             <p>Tersedia tempat yang strategis</p>
-//           </div>
-
-//           <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
-//             <HandCoins size={30} className="text-white mx-auto mb-2" />
-//             <p className="font-semibold">FREE</p>
-//             <p>Setiap kendaraan free parkir</p>
-//           </div>
-
-//           <div className="text-center max-w-xs rounded-lg container-bg-2 shadow-2xl p-6">
-//             <HeartPulse size={30} className="text-white mx-auto mb-2" />
-//             <p className="font-semibold">FREE DRINKS</p>
-//             <p>Menyediakan free minuman 3 botol</p>
-//           </div>
-//         </div>
-
-//         {/* Introduction Section */}
-//         <div className="text-center mb-6 mt-28 px-7 mx-auto">
-//           <p className="text-4xl font-semibold font-serif">
-//             Lapangan Kickzone Futsal
-//           </p>
-//           <p className="text-2xl mt-7 font-serif">
-//             Nikmati pengalaman bermain sepak bola yang tak tertandingi dengan
-//             menyewa lapangan kami! Lapangan kami dirancang untuk memberikan
-//             performa terbaik dengan permukaan yang terawat dan fasilitas modern.
-//             Baik untuk pertandingan santai bersama teman atau turnamen resmi,
-//             lapangan kami menyediakan lingkungan yang nyaman dan mendukung.
-//             Dapatkan akses mudah dengan lokasi strategis dan parkir yang
-//             memadai. Bergabunglah dengan kami dan ciptakan momen berharga di
-//             lapangan sepak bola terbaik. Hubungi kami sekarang untuk pemesanan
-//             dan rasakan sendiri perbedaannya!
-//           </p>
-//         </div>
-
-//         {/* Search and Sorting Controls */}
-//         <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-700 p-10 rounded-lg my-20 mx-auto w-full">
-//           <input
-//             type="text"
-//             placeholder="Cari lapangan..."
-//             value={searchQuery}
-//             onChange={(e) => setSearchQuery(e.target.value)}
-//             className="border border-gray-300 rounded-lg p-2 mb-4 sm:mb-0 w-full sm:w-1/3 bg-white"
-//           />
-
-//           <div className="flex gap-4">
-//             <select
-//               value={sortType}
-//               onChange={(e) => setSortType(e.target.value)}
-//               className="border border-gray-300 rounded-lg p-2 bg-white"
-//             >
-//               <option value="default">Urutkan berdasarkan</option>
-//               <option value="priceAsc">Harga: Rendah ke Tinggi</option>
-//               <option value="priceDesc">Harga: Tinggi ke Rendah</option>
-//               <option value="nameAsc">Nama: A-Z</option>
-//               <option value="nameDesc">Nama: Z-A</option>
-//             </select>
-//           </div>
-//         </div>
-
-//         {/* Fields Section */}
-//         <div
-//           id="lapangan"
-//           className="flex flex-wrap gap-8 justify-center mt-28 font-serif"
-//         >
-//           {sortedAndFilteredFields.map((field, index) => (
-//             <div
-//               className="border rounded-lg p-5 text-center w-full sm:w-80 md:w-1/3 lg:w-1/4 shadow-2xl mb-10 bg-slate-200"
-//               key={index}
-//             >
-//               <img
-//                 src={field.photo}
-//                 alt={field.fieldName}
-//                 className="w-full h-52 object-cover mb-4 mt-2"
-//               />
-//               <h2 className="text-lg font-semibold">{field.fieldName}</h2>
-//               <p className="text-gray-600">Rp {field.price}</p>
-//               <p>{field.description}</p>
-//               <div className="mt-4 flex flex-wrap justify-center gap-4">
-//                 <Link to="/user/jadwal">
-//                   <button className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-400">
-//                     Jadwal
-//                   </button>
-//                 </Link>
-//                 <button
-//                   className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-400"
-//                   onClick={() => openModal(field)}
-//                 >
-//                   Sewa
-//                 </button>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-//       {/* Footer */}
-//       <footer className="bg-gray-800 text-white py-6 px-6 font-serif">
-//         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
-//           {/* Contact Information */}
-//           <div className="mb-4 md:mb-0">
-//             <p className="text-xl font-semibold">Hubungi Kami</p>
-//             <p>
-//               Jl. Dakota I No.5c, Sukaraja, Cicendo, Kota Cimahi, Jawa Barat
-//               40175
-//             </p>
-//             <p>Email: info@kickzonefutsal.com</p>
-//             <p>Telepon: (022) 123-4567</p>
-//           </div>
-
-//           {/* Social Media Links */}
-//           <div className="flex gap-4">
-//             <a href="https://www.facebook.com" className="text-white">
-//               <Facebook size={24} />
-//             </a>
-//             <a href="https://www.instagram.com" className="text-white">
-//               <Instagram size={24} />
-//             </a>
-//             <a href="https://twitter.com" className="text-white">
-//               <Twitter size={24} />
-//             </a>
-//           </div>
-//         </div>
-//       </footer>
-
-//       {/* Booking Modal */}
-//       {isModalOpen && (
-//         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-//           <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
-//             <h2 className="text-2xl font-semibold mb-4">
-//               Pemesanan Lapangan: {selectedField.fieldName}
-//             </h2>
-//             <label className="block mb-2">
-//               Tanggal Pemesanan
-//               <input
-//                 type="date"
-//                 value={tanggalPesan}
-//                 onChange={(e) => setTanggalMain(e.target.value)}
-//                 className="border border-gray-300 rounded-lg p-2 w-full"
-//               />
-//             </label>
-//             <label className="block mb-2">
-//               Lama Sewa (jam)
-//               <input
-//                 type="number"
-//                 value={lamaSewa}
-//                 onChange={(e) => setDurasiMain(e.target.value)}
-//                 className="border border-gray-300 rounded-lg p-2 w-full"
-//               />
-//             </label>
-//             <label className="block mb-2">
-//               Waktu Mulai
-//               <input
-//                 type="time"
-//                 value={waktuMulai}
-//                 onChange={(e) => setWaktuMulai(e.target.value)}
-//                 className="border border-gray-300 rounded-lg p-2 w-full"
-//               />
-//             </label>
-//             <label className="block mb-4">
-//               Waktu Berakhir
-//               <input
-//                 type="time"
-//                 value={waktuBerakhir}
-//                 onChange={(e) => setWaktuBerakhir(e.target.value)}
-//                 className="border border-gray-300 rounded-lg p-2 w-full"
-//               />
-//             </label>
-//             <div className="flex justify-between">
-//               <button
-//                 onClick={handleBooking}
-//                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-//               >
-//                 Konfirmasi
-//               </button>
-//               <button
-//                 onClick={closeModal}
-//                 className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-//               >
-//                 Batal
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }

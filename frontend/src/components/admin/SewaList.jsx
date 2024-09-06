@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import HeaderAdmin from "./HeaderAdmin";
+import { Trash2 } from "lucide-react";
 
 const SewaList = () => {
   const [sewa, setSewa] = useState([]);
@@ -128,7 +129,7 @@ const SewaList = () => {
                           onClick={() => handleDelete(s.id)}
                           className="bg-red-500 text-white px-3 py-2 rounded"
                         >
-                          Delete
+                          <Trash2 />
                         </button>
                       </td>
                     </tr>
